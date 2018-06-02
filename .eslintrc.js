@@ -14,6 +14,7 @@ module.exports = {
     "es6": true
   },
   rules: {
+    "no-plusplus": [2, { allowForLoopAfterthoughts: true }],
     "react/prop-types": [2]
   },
   extends: ["airbnb"]
