@@ -1,8 +1,8 @@
-DROP DATABASE IF EXISTS airbnbreviews;
+DROP DATABASE IF EXISTS nappbnbreviews;
 
-CREATE DATABASE airbnbreviews;
+CREATE DATABASE nappbnbreviews;
 
-USE airbnbreviews;
+USE nappbnbreviews;
 
 SET GLOBAL max_allowed_packet=16777216;
 
@@ -14,12 +14,12 @@ CREATE TABLE reviews (
   room_id INT NOT NULL,
   text VARCHAR(1000) NULL,
   date DATE NOT NULL,
-  accuracy DECIMAL,
-  communication DECIMAL,
-  cleanliness DECIMAL,
-  location DECIMAL,
-  checkIn DECIMAL,
-  value DECIMAL,
+  accuracy DECIMAL(10,8),
+  communication DECIMAL(10,8),
+  cleanliness DECIMAL(10,8),
+  location DECIMAL(10,8),
+  checkIn DECIMAL(10,8),
+  value DECIMAL(10,8),
   PRIMARY KEY (id)
 );
 
@@ -38,12 +38,12 @@ CREATE TABLE rooms (
   id INT NOT NULL AUTO_INCREMENT,
   roomName VARCHAR(100),
   totalNumberReviews INT NOT NULL,
-  accuracy DECIMAL NOT NULL,
-  communication DECIMAL NOT NULL,
-  cleanliness DECIMAL NOT NULL,
-  location DECIMAL NOT NULL,
-  checkIn DECIMAL NOT NULL,
-  value DECIMAL NOT NULL,
+  accuracy DECIMAL(10,8) NOT NULL,
+  communication DECIMAL(10,8) NOT NULL,
+  cleanliness DECIMAL(10,8) NOT NULL,
+  location DECIMAL(10,8) NOT NULL,
+  checkIn DECIMAL(10,8) NOT NULL,
+  value DECIMAL(10,8) NOT NULL,
   PRIMARY KEY (id)
 );
 

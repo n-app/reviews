@@ -2,18 +2,21 @@ const randomGenerator = require('./randomGenerator');
 const db = require('./index');
 
 
+const numPics = 348;
+const templateUrl = 'https://s3-us-west-1.amazonaws.com/nappbnbreviews/portait**.jpeg';
+
 const numUsers = randomGenerator.generateInteger(1000, 100);
-const userObjs =[];
+const userObjs = [];
 
 for (let i = 0; i < numUsers; i++) {
   userObjs[i] = {
     userName: randomGenerator.generateString(null, 10, 3),
-    icon: randomGenerator.generateString(null, 50, 10, randomGenerator.generateCharArray('a','z',false,['-', '.', '//'])),
+    icon: templateUrl.replace('**', randomGenerator.generateInteger(numPics, 1).toString()),
   };
 }
 
 let numReviews;
-const reviewObjs =[];
+const reviewObjs = [];
 const zeroReviewRates = {
   accuracy: 0,
   communication: 0,
@@ -21,25 +24,28 @@ const zeroReviewRates = {
   location: 0,
   checkIn: 0,
   value: 0,
-}
+};
 let avgReviewRates;
-let reviewRates = {};
+const reviewRates = {};
+
+const addRates = (j, key) => {
+  reviewRates[key] = randomGenerator.generateInteger(5, 3);
+  avgReviewRates[key] = ((avgReviewRates[key] * j) + reviewRates[key]) / (j + 1);
+};
 
 const numRooms = 100;
 const roomObjs = [];
+
 
 for (let i = 0; i < numRooms; i++) {
   numReviews = randomGenerator.generateInteger(200, 0);
   avgReviewRates = Object.assign({}, zeroReviewRates);
   for (let j = 0; j < numReviews; j++) {
-    for (let key of Object.keys(zeroReviewRates)) {
-      reviewRates[key] = randomGenerator.generateInteger(5, 3);
-      avgReviewRates[key] = (avgReviewRates[key] * j + reviewRates[key]) / (j + 1);
-    }
+    Object.keys(zeroReviewRates).forEach(addRates.bind(null, j));
     reviewObjs.push(Object.assign({
       user_id: randomGenerator.generateInteger(numUsers, 1),
       room_id: i + 1,
-      text: randomGenerator.generateWords(null,1000, 80, 6),
+      text: randomGenerator.generateWords(null, 1000, 80, 6),
       date: randomGenerator.generateDateString('2018-6-2', '2010-1-1'),
     }, reviewRates));
   }
@@ -53,9 +59,9 @@ for (let i = 0; i < numRooms; i++) {
 
 db.truncateAllTables()
   .then(db.insertRecord('users', userObjs))
-  .catch(err => console.log('usersError: ', err))
+  .catch((err) => { throw err; })
   .then(db.insertRecord('rooms', roomObjs))
-  .catch(err => console.log('roomsError: ', err))
+  .catch((err) => { throw err; })
   .then(db.insertRecord('reviews', reviewObjs))
-  .catch(err => console.log('reviewsError: ', err))
+  .catch((err) => { throw err; })
   .then(() => console.log('done'));
