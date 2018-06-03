@@ -12,7 +12,8 @@ const generateCharArray = (letterA, letterB, includeUpperCase = true, specialCha
     if (includeUpperCase) { generatedArray.push(String.fromCharCode(i).toUpperCase()); }
   }
   if (specialCharArray) { generatedArray = generatedArray.concat(specialCharArray); }
-  return generateCharArray.sort();
+  generatedArray.sort();
+  return generatedArray;
 };
 
 const generateInteger = (max = 1, min = 0) => Math.floor(Math.random() * ((max + 1) - min)) + min;
@@ -28,15 +29,15 @@ const generateString = (lengthOfString, maxLength = 5, minLength = 3, options = 
   return generatedString;
 };
 
-const generateWords = (numberOfWords, maxNumberOfWords = 3, minNumberOfWords = 1) => {
-  const numWords = numberOfWords || generateInteger(maxNumberOfWords, minNumberOfWords);
+const generateWords = (numWords, maxLength = 500, maxNumWords = 3, minNumWords = 1) => {
+  const numberOfWords = numWords || generateInteger(maxNumWords, minNumWords);
 
   const generatedWords = [];
-  for (let i = 0; i < numWords; i++) {
+  for (let i = 0; i < numberOfWords; i++) {
     generatedWords[i] = words[generateInteger(words.length - 1)];
   }
 
-  return generatedWords.join(' ');
+  return generatedWords.join(' ').slice(0, maxLength);
 };
 
 const generateDateString = (maxDate = '2020-12-31', minDate = '1990-1-1') => {

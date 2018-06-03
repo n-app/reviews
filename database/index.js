@@ -19,6 +19,27 @@ class MySqlDatabase {
 
 const connection = new MySqlDatabase(mysqlConfig);
 
-module.exports = {
+const insertRecord = (tableName, recordObjs) => {
+  const queryOptions = {
+    sql: Array(recordObjs.length + 1).join(`INSERT INTO ${tableName} SET ?;`),
+    values: recordObjs,
+  };
+  return connection.query(queryOptions)
+    .then(results => JSON.parse(JSON.stringify(results)));
+};
 
+const truncateAllTables = () => connection.query(`SET FOREIGN_KEY_CHECKS = 0;
+  TRUNCATE users;
+  TRUNCATE rooms;
+  TRUNCATE reviews;
+  SET FOREIGN_KEY_CHECKS = 1;`)
+  .then(results => JSON.parse(JSON.stringify(results)));
+
+// const queryReviewsByRoomId = (room_id, queryObj) => {
+
+// };
+
+module.exports = {
+  insertRecord,
+  truncateAllTables,
 };
