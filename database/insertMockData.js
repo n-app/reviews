@@ -1,7 +1,6 @@
 const randomGenerator = require('./randomGenerator');
 const db = require('./index');
 
-
 const numPics = 348;
 const templateUrl = 'https://s3-us-west-1.amazonaws.com/nappbnbreviews/portait**.jpeg';
 
@@ -11,7 +10,7 @@ const userObjs = [];
 for (let i = 0; i < numUsers; i++) {
   userObjs[i] = {
     userName: randomGenerator.generateString(null, 10, 3),
-    icon: templateUrl.replace('**', randomGenerator.generateInteger(numPics, 1).toString()),
+    avatar: templateUrl.replace('**', randomGenerator.generateInteger(numPics, 1).toString()),
   };
 }
 
@@ -57,11 +56,24 @@ for (let i = 0; i < numRooms; i++) {
   }, avgReviewRates);
 }
 
-db.truncateAllTables()
-  .then(db.insertRecord('users', userObjs))
-  .catch((err) => { throw err; })
-  .then(db.insertRecord('rooms', roomObjs))
-  .catch((err) => { throw err; })
-  .then(db.insertRecord('reviews', reviewObjs))
-  .catch((err) => { throw err; })
-  .then(() => console.log('done'));
+const insertMockData = async () => {
+  try {
+    await Promise.all([
+      db.truncateAllTables(),
+      db.insertRecord('users', userObjs),
+      db.insertRecord('rooms', roomObjs),
+      db.insertRecord('reviews', reviewObjs)
+    ]);
+    console.log('done');
+  } catch (err) {
+    throw new Error(err.message);
+  }
+}
+
+module.exports = {
+  insertMockData,
+};
+
+if (!module.parent) {
+  insertMockData();
+}

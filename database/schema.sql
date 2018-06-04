@@ -28,7 +28,7 @@ DROP TABLE IF EXISTS users;
 CREATE TABLE users (
   id INT NOT NULL AUTO_INCREMENT,
   userName VARCHAR(100),
-  icon VARCHAR(100),
+  avatar VARCHAR(100),
   PRIMARY KEY (id)
 );
 
