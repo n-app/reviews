@@ -43,8 +43,8 @@ for (let i = 0; i < numRooms; i++) {
   for (let j = 0; j < numReviews; j++) {
     Object.keys(zeroReviewRates).forEach(addRates.bind(null, j));
     reviewObjs.push(Object.assign({
-      user_id: randomGenerator.generateInteger(numUsers, 1),
-      room_id: i + 1,
+      userId: randomGenerator.generateInteger(numUsers, 1),
+      roomId: i + 1,
       text: randomGenerator.generateWords(null, 1000, 80, 6),
       date: randomGenerator.generateDateString('2018-6-2', '2010-1-1'),
     }, reviewRates));

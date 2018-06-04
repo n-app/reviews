@@ -10,8 +10,8 @@ DROP TABLE IF EXISTS reviews;
 		
 CREATE TABLE reviews (
   id INT NOT NULL AUTO_INCREMENT,
-  user_id INT NOT NULL,
-  room_id INT NOT NULL,
+  userId INT NOT NULL,
+  roomId INT NOT NULL,
   text VARCHAR(1000) NULL,
   date DATE NOT NULL,
   accuracy DECIMAL(10,8),
@@ -47,5 +47,5 @@ CREATE TABLE rooms (
   PRIMARY KEY (id)
 );
 
-ALTER TABLE reviews ADD FOREIGN KEY (user_id) REFERENCES users (id);
-ALTER TABLE reviews ADD FOREIGN KEY (room_id) REFERENCES rooms (id);
+ALTER TABLE reviews ADD FOREIGN KEY (userId) REFERENCES users (id);
+ALTER TABLE reviews ADD FOREIGN KEY (roomId) REFERENCES rooms (id);
