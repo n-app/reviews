@@ -1,6 +1,7 @@
 const tempStorage = {
   totalNumberResults: 0,
-  allQueryResults: [],
+  roomInfo: {},
+  allQueryReviews: [],
 };
 
 module.exports = tempStorage;

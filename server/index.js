@@ -31,7 +31,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// serve up the page
+// serve up the pages
 app.use(express.static('public'));
 app.get('/favicon.ico', (req, res) => res.status(204));
 
