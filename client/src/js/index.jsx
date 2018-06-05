@@ -4,7 +4,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import Reviews from './components/reviews';
-import store from './store/index';
+import configureStore from './store/configureStore';
+
+const store = configureStore(); // can also pass in an initialState here
 
 ReactDOM.render(
   (
