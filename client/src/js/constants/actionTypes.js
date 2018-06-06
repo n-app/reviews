@@ -1,6 +1,8 @@
 // client/src/js/constants/actionTypes.js
 
 export default {
-  A: 'A',
-  B: 'B',
+  ROOM_HAS_ERRORED: 'ROOM_HAS_ERRORED',
+  PAGE_HAS_ERRORED: 'PAGE_HAS_ERRORED',
+  ROOM_IS_FETCHING: 'ROOM_IS_FETCHING',
+  PAGE_IS_FETCHING: 'PAGE_IS_FETCHING',
 };
