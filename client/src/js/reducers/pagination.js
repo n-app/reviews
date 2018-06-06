@@ -3,9 +3,9 @@
 import {
   PAGE_HAS_ERRORED,
   PAGE_IS_FETCHING,
+  UPDATE_PAGE_INFO,
 } from '../constants/actionTypes';
 
-const numberReviewsPerPage = 7;
 
 export default {
   pageHasErrored: (state = false, action) => {
@@ -30,8 +30,11 @@ export default {
     }
   },
 
-  page: (state = { numberReviewsPerPage }, action) => {
+  page: (state = {}, action) => {
     switch (action.type) {
+      case UPDATE_PAGE_INFO: {
+        return { ...state, ...action.page };
+      }
       default: {
         return state;
       }

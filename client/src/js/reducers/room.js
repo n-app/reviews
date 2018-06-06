@@ -1,6 +1,10 @@
 // client/src/js/reducers/room.js
 
-import { ROOM_HAS_ERRORED, ROOM_IS_FETCHING } from '../constants/actionTypes';
+import {
+  ROOM_HAS_ERRORED,
+  ROOM_IS_FETCHING,
+  UPDATE_ROOM_INFO,
+} from '../constants/actionTypes';
 
 export default {
   roomHasErrored: (state = false, action) => {
@@ -27,6 +31,9 @@ export default {
 
   room: (state = {}, action) => {
     switch (action.type) {
+      case UPDATE_ROOM_INFO: {
+        return { ...state, ...action.room };
+      }
       default: {
         return state;
       }
