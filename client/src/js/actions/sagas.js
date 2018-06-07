@@ -2,7 +2,17 @@
 
 import { call, put, fork, cancel, takeLatest } from 'redux-saga/effects';
 import { updateState } from './index';
+import { SELECT_A_ROOM, SELECT_A_PAGE } from '../constants/actionTypes';
 import fetchData from '../apis/fetchData';
+
+function calculatePages(numberReviewsPerPage, totalNumberReviews) {
+  const totalPages = Math.ceil(totalNumberReviews / numberReviewsPerPage);
+  const pages = [];
+  for (let i = 0; i < totalPages; i++) {
+    pages[i] = [i + 1, i * numberReviewsPerPage];
+  }
+  return pages;
+}
 
 export function* pageIsFetching(state) {
   const newState = {
@@ -56,7 +66,6 @@ export function* roomInfoFetched(state) {
   yield put(updateState(newState));
 }
 
-
 export function* getReviewPage(state) {
   try {
     const task = yield fork(pageIsFetching);
@@ -87,6 +96,7 @@ export function* getRoomInfo(state) {
       state.numberReviewsPerPage,
     );
     yield cancel(task);
+
     const newState = {
       ...state,
       roomId: data.roomInfo.id,
@@ -100,8 +110,12 @@ export function* getRoomInfo(state) {
         checkIn: data.roomInfo.checkIn,
         value: data.roomInfo.value,
       },
+      totalNumberReviews: data.totalNumberResults,
+      reviews: data.reviews,
+      pages: calculatePages(state.numberReviewsPerPage, data.totalNumberResults),
     };
     yield call(roomInfoFetched, newState);
+
   } catch (err) {
     throw (err);
   }
@@ -131,11 +145,11 @@ export function* selectARoom(action) {
 }
 
 function* mySelectAPage() {
-  yield takeLatest('SELECT_A_PAGE', selectAPage);
+  yield takeLatest(SELECT_A_PAGE, selectAPage);
 }
 
 function* mySelectARoom() {
-  yield takeLatest('SELECT_A_ROOM', selectARoom);
+  yield takeLatest(SELECT_A_ROOM, selectARoom);
 }
 
 export default {
