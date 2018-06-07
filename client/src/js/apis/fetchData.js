@@ -1,5 +1,7 @@
 // client/src/js/apis/fetchData.js
 
+import fetch from 'cross-fetch';
+
 const roomUrl = 'http://localhost:3003/rooms/';
 
 const getRoomInfo = async (roomId, NumberReviewsPerPage) => {

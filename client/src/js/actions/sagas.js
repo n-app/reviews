@@ -4,7 +4,7 @@ import { call, put, fork, cancel, takeLatest } from 'redux-saga/effects';
 import { updateState } from './index';
 import fetchData from '../apis/fetchData';
 
-function* pageIsFetching(state) {
+export function* pageIsFetching(state) {
   const newState = {
     ...state,
     pageIsFetching: true,
@@ -13,7 +13,7 @@ function* pageIsFetching(state) {
   yield put(updateState(newState));
 }
 
-function* roomIsFetching(state) {
+export function* roomIsFetching(state) {
   const newState = {
     ...state,
     roomIsFetching: true,
@@ -22,7 +22,7 @@ function* roomIsFetching(state) {
   yield put(updateState(newState));
 }
 
-function* pageHasErrored(state) {
+export function* pageHasErrored(state) {
   const newState = {
     ...state,
     pageIsFetching: false,
@@ -31,7 +31,7 @@ function* pageHasErrored(state) {
   yield put(updateState(newState));
 }
 
-function* roomHasErrored(state) {
+export function* roomHasErrored(state) {
   const newState = {
     ...state,
     roomIsFetching: false,
@@ -40,16 +40,7 @@ function* roomHasErrored(state) {
   yield put(updateState(newState));
 }
 
-
-function* roomInfoFetched(state) {
-  const newState = {
-    ...state,
-    roomIsFetching: false,
-  };
-  yield put(updateState(newState));
-}
-
-function* pageInfoFetched(state) {
+export function* pageInfoFetched(state) {
   const newState = {
     ...state,
     pageIsFetching: false,
@@ -57,7 +48,16 @@ function* pageInfoFetched(state) {
   yield put(updateState(newState));
 }
 
-function* getReviewPage(state) {
+export function* roomInfoFetched(state) {
+  const newState = {
+    ...state,
+    roomIsFetching: false,
+  };
+  yield put(updateState(newState));
+}
+
+
+export function* getReviewPage(state) {
   try {
     const task = yield fork(pageIsFetching);
     const data = yield call(
@@ -77,7 +77,7 @@ function* getReviewPage(state) {
   }
 }
 
-function* getRoomInfo(state) {
+export function* getRoomInfo(state) {
   try {
     const task = yield fork(roomIsFetching);
     const data = yield call(
@@ -107,16 +107,16 @@ function* getRoomInfo(state) {
   }
 }
 
-function* selectAPage(action) {
+export function* selectAPage(action) {
   const state = { ...action.state };
   try {
     yield call(getReviewPage, state);
   } catch (err) {
-    yield call(pageHasErrored(state));
+    yield call(pageHasErrored, state);
   }
 }
 
-function* selectARoom(action) {
+export function* selectARoom(action) {
   const state = {
     ...action.state,
     currentPage: 1,
@@ -126,7 +126,7 @@ function* selectARoom(action) {
   try {
     yield call(getRoomInfo, state);
   } catch (err) {
-    yield call(roomHasErrored(state));
+    yield call(roomHasErrored, state);
   }
 }
 
@@ -142,13 +142,3 @@ export default {
   mySelectAPage,
   mySelectARoom,
 };
-
-
-//test:
-const iterator = selectAPage({ type: 'SELECT_A_PAGE', state: {
-  currentPage: 2,
-  roomId: 1002,
-  numberReviewsPerPage: 7,
-} })
-
-console.log(iterator.next().value);
