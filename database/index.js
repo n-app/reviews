@@ -38,7 +38,8 @@ const truncateAllTables = async () => {
 
 const queryReviewsByRoomId = async (queryObj) => {
   let sql = 'SELECT userName, avatar, date, (accuracy + communication + cleanliness + location + checkIn + value)/6 AS aggregateRate, text FROM ' +
-    '(select users.userName, users.avatar, reviews.date, reviews.accuracy, reviews.communication, reviews.cleanliness, reviews.location, reviews.checkIn, reviews.value, reviews.text ' +
+    '(select users.userName, users.avatar, reviews.date, reviews.accuracy, reviews.communication, reviews.cleanliness, ' +
+    'reviews.location, reviews.checkIn, reviews.value, reviews.text ' +
     `FROM reviews INNER JOIN users ON users.id = reviews.userId WHERE reviews.roomId = ${queryObj.roomId}) AS candidates`;
   if (queryObj.keyword) {
     sql += ` WHERE text LIKE "%${queryObj.keyword}%"`;

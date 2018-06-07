@@ -1,5 +1,49 @@
-import ReactDOM from 'react-dom';
-import React from 'react';
-import App from './components/app';
+// client/src/js/index.jsx
 
-ReactDOM.render(<App />, document.getElementById('app'));
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import Reviews from './components/reviews';
+import configureStore from './store/configureStore';
+import sagas from './actions/sagas';
+
+const initialState = {
+  query: {
+    queryInput: '',
+    querySortBy: null,
+  },
+  roomHasErrored: false,
+  roomIsFetching: false,
+  pageHasErrored: false,
+  pageIsFetching: false,
+  roomId: 0,
+  roomName: '',
+  roomTotalReviewNumber: 0,
+  overAllRating: {
+    accuracy: 0,
+    communication: 0,
+    cleanliness: 0,
+    location: 0,
+    checkIn: 0,
+    value: 0,
+  },
+  numberReviewsPerPage: 7,
+  currentPage: 0,
+  totalNumberResults: 0,
+  reviews: [],
+  pages: [],
+};
+
+const store = configureStore(initialState); // can also pass in an initialState here
+
+store.runSaga(sagas.mySelectAPage);
+store.runSaga(sagas.mySelectARoom);
+
+ReactDOM.render(
+  (
+    <Provider store={store}>
+      <Reviews />
+    </Provider>
+  ),
+  document.getElementById('reviews'),
+);
