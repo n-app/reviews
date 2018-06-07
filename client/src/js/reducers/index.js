@@ -11,6 +11,8 @@ function createReducer(initialState, handlers) {
 
 const actionHandlers = {
   UPDATE_STATE: (state, action) => ({ ...state, ...action.state }),
+  UDPATE_QUERY_INPUT: (state, action) => ({ ...state, queryInput: action.queryInput }),
+  UPDATE_QUERY_SORTBY: (state, action) => ({ ...state, querySortBy: action.querySortBy }),
 };
 
 const rootReducer = createReducer({}, actionHandlers);

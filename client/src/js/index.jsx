@@ -8,10 +8,8 @@ import configureStore from './store/configureStore';
 import sagas from './actions/sagas';
 
 const initialState = {
-  query: {
-    queryInput: '',
-    querySortBy: null,
-  },
+  queryInput: '',
+  querySortBy: null,
   roomHasErrored: false,
   roomIsFetching: false,
   pageHasErrored: false,
