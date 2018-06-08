@@ -52,7 +52,6 @@ app.use((error, req, res, next) => {
       message: error.message,
     },
   });
-  next();
 });
 
 // determine listening port

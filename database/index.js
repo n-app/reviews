@@ -2,11 +2,34 @@ const mysql = require('mysql');
 const util = require('util');
 const mysqlConfig = require('./config');
 
-// create mysql connection
-const connection = mysql.createConnection(mysqlConfig);
+let connection;
 
-// promisify connection.query
-connection.query = util.promisify(connection.query);
+let timeout;
+function handleDisconnect() {
+  // create mysql connection
+  connection = mysql.createConnection(mysqlConfig);
+
+  connection.connect((err) => {
+    if (err) {
+      if (timeout) clearTimeout(timeout);
+      timeout = setTimeout(handleDisconnect, 50);
+    }
+  });
+
+  // promisify connection.query
+  connection.query = util.promisify(connection.query);
+
+  connection.on('error', (err) => {
+    if (err.code === 'PROTOCOL_CONNECTION_LOST' || err.code === 'ECONNREFUSED') {
+      handleDisconnect();
+    } else {
+      console.log('db error', err);
+      throw err;
+    }
+  });
+}
+
+handleDisconnect();
 
 // helper database functions using async/await
 const insertRecord = async (tableName, recordObjs) => {
