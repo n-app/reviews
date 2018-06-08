@@ -1,3 +1,5 @@
+// jest file
+
 import { call, put, fork, cancel } from 'redux-saga/effects';
 import { cloneableGenerator } from 'redux-saga/utils';
 import { createMockTask } from 'redux-saga/lib/utils';

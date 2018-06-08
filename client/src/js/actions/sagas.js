@@ -3,13 +3,16 @@
 import { call, put, fork, cancel, takeLatest } from 'redux-saga/effects';
 import { updateState } from './index';
 import fetchData from '../apis/fetchData';
+import { calculatePages } from '../../../../helpers/clientHelplers';
+
 
 export function* pageIsFetching(state) {
   const newState = {
     ...state,
     pageIsFetching: true,
-    pageHasErroed: false,
+    pageHasErrored: false,
   };
+
   yield put(updateState(newState));
 }
 
@@ -17,7 +20,7 @@ export function* roomIsFetching(state) {
   const newState = {
     ...state,
     roomIsFetching: true,
-    roomHasErroed: false,
+    roomHasErrored: false,
   };
   yield put(updateState(newState));
 }
@@ -26,7 +29,7 @@ export function* pageHasErrored(state) {
   const newState = {
     ...state,
     pageIsFetching: false,
-    pageHasErroed: true,
+    pageHasErrored: true,
   };
   yield put(updateState(newState));
 }
@@ -35,7 +38,7 @@ export function* roomHasErrored(state) {
   const newState = {
     ...state,
     roomIsFetching: false,
-    roomHasErroed: true,
+    roomHasErrored: true,
   };
   yield put(updateState(newState));
 }
@@ -55,7 +58,6 @@ export function* roomInfoFetched(state) {
   };
   yield put(updateState(newState));
 }
-
 
 export function* getReviewPage(state) {
   try {
@@ -83,10 +85,10 @@ export function* getRoomInfo(state) {
     const data = yield call(
       fetchData.getRoomInfo,
       state.roomId,
-      state.currentPage,
       state.numberReviewsPerPage,
     );
     yield cancel(task);
+
     const newState = {
       ...state,
       roomId: data.roomInfo.id,
@@ -100,6 +102,9 @@ export function* getRoomInfo(state) {
         checkIn: data.roomInfo.checkIn,
         value: data.roomInfo.value,
       },
+      totalNumberReviews: data.totalNumberResults,
+      reviews: data.reviews,
+      pages: calculatePages(state.numberReviewsPerPage, data.totalNumberResults),
     };
     yield call(roomInfoFetched, newState);
   } catch (err) {

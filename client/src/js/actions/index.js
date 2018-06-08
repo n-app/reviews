@@ -1,8 +1,8 @@
 // client/src/js/actions/index.js
 
-import { UPDATE_STATE } from '../constants/actionTypes';
 
-
-export default {
-  updateState: state => ({ type: UPDATE_STATE, state }),
-};
+export const updateState = state => ({ type: 'UPDATE_STATE', state });
+export const selectARoom = (roomId, numberReviewsPerPage) => ({ type: 'SELECT_A_ROOM', state: { roomId, numberReviewsPerPage } });
+export const selectAPage = (roomId, currentPage, numberReviewsPerPage) => ({ type: 'SELECT_A_PAGE', state: { roomId, currentPage, numberReviewsPerPage } });
+export const updateQueryInput = queryInput => ({ type: 'UPDATE_QUERY_INPUT', queryInput });
+export const updateQuerySortBy = querySortBy => ({ type: 'UDPATE_QUERY_SORTBY', querySortBy });

@@ -2,21 +2,20 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+
 import { Provider } from 'react-redux';
 import Reviews from './components/reviews';
 import configureStore from './store/configureStore';
 import sagas from './actions/sagas';
 
 const initialState = {
-  query: {
-    queryInput: '',
-    querySortBy: null,
-  },
+  queryInput: '',
+  querySortBy: null,
   roomHasErrored: false,
   roomIsFetching: false,
   pageHasErrored: false,
   pageIsFetching: false,
-  roomId: 0,
+  roomId: 1001,
   roomName: '',
   roomTotalReviewNumber: 0,
   overAllRating: {

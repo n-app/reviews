@@ -4,10 +4,10 @@ import fetch from 'cross-fetch';
 
 const roomUrl = 'http://localhost:3003/rooms/';
 
-const getRoomInfo = async (roomId, NumberReviewsPerPage) => {
+const getRoomInfo = async (roomId, numberReviewsPerPage) => {
   try {
     const url = new URL(roomUrl + roomId);
-    const params = { pageonly: 0, start: 0, limit: NumberReviewsPerPage };
+    const params = { pageonly: 0, start: 0, limit: numberReviewsPerPage };
     url.search = new URLSearchParams(params);
     const response = fetch(url);
     return (await response).json();
@@ -16,11 +16,11 @@ const getRoomInfo = async (roomId, NumberReviewsPerPage) => {
   }
 };
 
-const getReviewPage = async (roomId, pageNum, NumberReviewsPerPage) => {
+const getReviewPage = async (roomId, pageNum, numberReviewsPerPage) => {
   try {
     const url = new URL(roomUrl + roomId);
-    const start = (pageNum - 1) * NumberReviewsPerPage;
-    const params = { pageonly: 1, start, limit: NumberReviewsPerPage };
+    const start = (pageNum - 1) * numberReviewsPerPage;
+    const params = { pageonly: 1, start, limit: numberReviewsPerPage };
     url.search = new URLSearchParams(params);
     const response = fetch(url);
     return (await response).json();
@@ -29,10 +29,10 @@ const getReviewPage = async (roomId, pageNum, NumberReviewsPerPage) => {
   }
 };
 
-const queryReviews = async (roomId, keyword, sortBy, NumberReviewsPerPage) => {
+const queryReviews = async (roomId, keyword, sortBy, numberReviewsPerPage) => {
   try {
     const url = new URL(roomUrl + roomId);
-    const params = { pageonly: 1, start: 0, limit: NumberReviewsPerPage };
+    const params = { pageonly: 1, start: 0, limit: numberReviewsPerPage };
     url.search = new URLSearchParams(params);
     const response = fetch(url, {
       method: 'POST',
@@ -53,3 +53,4 @@ export default {
   getReviewPage,
   queryReviews,
 };
+
