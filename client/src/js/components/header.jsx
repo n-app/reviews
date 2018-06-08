@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import actions from '../actions/index';
+import { updateQueryInput } from '../actions/index';
 import { calculateOverAllRates } from '../../../../helpers/clientHelplers';
 
 const mapStateToProps = state => ({
@@ -11,14 +11,14 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateQueryInput: (queryInput) => { dispatch(actions.updateQueryInput(queryInput)); },
+  updateQueryInput: (queryInput) => { dispatch(updateQueryInput(queryInput)); },
 });
 
 class Header extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      input: props.queryInput,
+      input: this.props.queryInput,
     };
 
     this.updateQueryInput = this.props.updateQueryInput.bind(this);

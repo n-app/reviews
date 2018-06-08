@@ -3,6 +3,7 @@
 const rootReducer = (state = {}, action) => {
   switch (action.type) {
     case 'UPDATE_STATE': {
+      console.log(action.state);
       return { ...state, ...action.state };
     }
     case 'UPDATE_QUERY_INPUT': {

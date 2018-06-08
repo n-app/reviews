@@ -10,8 +10,9 @@ export function* pageIsFetching(state) {
   const newState = {
     ...state,
     pageIsFetching: true,
-    pageHasErroed: false,
+    pageHasErrored: false,
   };
+
   yield put(updateState(newState));
 }
 
@@ -19,7 +20,7 @@ export function* roomIsFetching(state) {
   const newState = {
     ...state,
     roomIsFetching: true,
-    roomHasErroed: false,
+    roomHasErrored: false,
   };
   yield put(updateState(newState));
 }
@@ -28,7 +29,7 @@ export function* pageHasErrored(state) {
   const newState = {
     ...state,
     pageIsFetching: false,
-    pageHasErroed: true,
+    pageHasErrored: true,
   };
   yield put(updateState(newState));
 }
@@ -37,7 +38,7 @@ export function* roomHasErrored(state) {
   const newState = {
     ...state,
     roomIsFetching: false,
-    roomHasErroed: true,
+    roomHasErrored: true,
   };
   yield put(updateState(newState));
 }
