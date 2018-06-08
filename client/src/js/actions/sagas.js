@@ -85,7 +85,6 @@ export function* getRoomInfo(state) {
     const data = yield call(
       fetchData.getRoomInfo,
       state.roomId,
-      state.currentPage,
       state.numberReviewsPerPage,
     );
     yield cancel(task);
