@@ -2,6 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+
 import { Provider } from 'react-redux';
 import Reviews from './components/reviews';
 import configureStore from './store/configureStore';

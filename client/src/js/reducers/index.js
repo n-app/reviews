@@ -1,20 +1,20 @@
 // client/src/js/reducers/index.js
 
-function createReducer(initialState, handlers) {
-  return function reducer(state = initialState, action) {
-    if (handlers[action.type]) {
-      return handlers[action.type](state, action);
+const rootReducer = (state = {}, action) => {
+  switch (action.type) {
+    case 'UPDATE_STATE': {
+      return { ...state, ...action.state };
     }
-    return state;
-  };
-}
-
-const actionHandlers = {
-  UPDATE_STATE: (state, action) => ({ ...state, ...action.state }),
-  UDPATE_QUERY_INPUT: (state, action) => ({ ...state, queryInput: action.queryInput }),
-  UPDATE_QUERY_SORTBY: (state, action) => ({ ...state, querySortBy: action.querySortBy }),
+    case 'UPDATE_QUERY_INPUT': {
+      return { ...state, queryInput: action.queryInput };
+    }
+    case 'UPDATE_QUERY_SORTBY': {
+      return { ...state, querySortBy: action.querySortBy };
+    }
+    default: {
+      return state;
+    }
+  }
 };
-
-const rootReducer = createReducer({}, actionHandlers);
 
 export default rootReducer;

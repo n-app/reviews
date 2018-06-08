@@ -1,9 +1,0 @@
-// client/src/js/constants/actionTypes.js
-
-export default {
-  UPDATE_STATE: 'UPDATE_STATE',
-  SELECT_A_ROOM: 'SELECT_A_ROOM',
-  SELECT_A_PAGE: 'SELECT_A_PAGE',
-  UDPATE_QUERY_INPUT: 'UPDATE_QUERY_INPUT',
-  UPDATE_QUERY_SORTBY: 'UPDATE_QUERY_SORTBY',
-};

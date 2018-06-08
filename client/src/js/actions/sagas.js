@@ -2,17 +2,9 @@
 
 import { call, put, fork, cancel, takeLatest } from 'redux-saga/effects';
 import { updateState } from './index';
-import { SELECT_A_ROOM, SELECT_A_PAGE } from '../constants/actionTypes';
 import fetchData from '../apis/fetchData';
+import { calculatePages } from '../../../../helpers/clientHelplers';
 
-function calculatePages(numberReviewsPerPage, totalNumberReviews) {
-  const totalPages = Math.ceil(totalNumberReviews / numberReviewsPerPage);
-  const pages = [];
-  for (let i = 0; i < totalPages; i++) {
-    pages[i] = [i + 1, i * numberReviewsPerPage];
-  }
-  return pages;
-}
 
 export function* pageIsFetching(state) {
   const newState = {
@@ -115,7 +107,6 @@ export function* getRoomInfo(state) {
       pages: calculatePages(state.numberReviewsPerPage, data.totalNumberResults),
     };
     yield call(roomInfoFetched, newState);
-
   } catch (err) {
     throw (err);
   }
@@ -145,11 +136,11 @@ export function* selectARoom(action) {
 }
 
 function* mySelectAPage() {
-  yield takeLatest(SELECT_A_PAGE, selectAPage);
+  yield takeLatest('SELECT_A_PAGE', selectAPage);
 }
 
 function* mySelectARoom() {
-  yield takeLatest(SELECT_A_ROOM, selectARoom);
+  yield takeLatest('SELECT_A_ROOM', selectARoom);
 }
 
 export default {
