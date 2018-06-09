@@ -94,7 +94,7 @@ export function* getRoomInfo(state) {
       roomId: data.roomInfo.id,
       roomName: data.roomInfo.roomName,
       roomTotalReviewNumber: data.roomInfo.totalNumberReviews,
-      overAllRating: {
+      overallRating: {
         accuracy: data.roomInfo.accuracy,
         communication: data.roomInfo.communication,
         cleanliness: data.roomInfo.cleanliness,

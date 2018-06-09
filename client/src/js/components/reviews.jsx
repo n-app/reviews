@@ -20,17 +20,20 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-let timeout;
-
 class Reviews extends React.Component {
+  constructor(props) {
+    super(props);
+    this.timeout = null;
+  }
+
   componentDidMount() {
     this.props.selectARoom(this.props.roomId, this.props.numberReviewsPerPage);
   }
 
   render() {
     if (this.props.roomHasErrored) {
-      if (timeout) clearTimeout(timeout);
-      timeout = setTimeout(
+      if (this.timeout) clearTimeout(this.timeout);
+      this.timeout = setTimeout(
         this.props.selectARoom.bind(this, this.props.roomId, this.props.numberReviewsPerPage),
         5000,
       );

@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { updateQueryInput } from '../actions/index';
-import { calculateOverAllRates } from '../../../../helpers/clientHelplers';
+import { calculateOverallRates } from '../../../../helpers/clientHelplers';
 
 const mapStateToProps = state => ({
   roomTotalReviewNumber: state.roomTotalReviewNumber,
-  overAllRating: calculateOverAllRates(state.overAllRating),
+  overallRating: calculateOverallRates(state.overallRating),
   queryInput: state.queryInput,
 });
 
@@ -41,9 +41,9 @@ class Header extends React.Component {
   render() {
     return (
       <div className="header-banner">
-        <h2>{this.props.roomTotalReviewNumber} Reviews</h2>
-        <h2>
-          {Math.round(this.props.overAllRating * 100) / 100}
+        <h2 className="review-total">{this.props.roomTotalReviewNumber} Reviews</h2>
+        <h2 className="rate-star">
+          {Math.round(this.props.overallRating * 100) / 100}
         </h2>
         <input
           type="text"
@@ -60,7 +60,7 @@ class Header extends React.Component {
 
 Header.propTypes = {
   roomTotalReviewNumber: PropTypes.number.isRequired,
-  overAllRating: PropTypes.number.isRequired,
+  overallRating: PropTypes.number.isRequired,
   queryInput: PropTypes.string.isRequired,
   updateQueryInput: PropTypes.func.isRequired,
 };
