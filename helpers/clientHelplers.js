@@ -26,15 +26,9 @@ export const displayPages = (currentPage, pages) => {
       }
     }
   }
-  // console.log(selectedPages);
   if ((currentPage === pages.length) && pages.length > 2) {
     selectedPages.push(pages[pages.length - 3]);
   }
-  // let currentPointer;
-  // for (let i = Math.max(currentPage - 2, 0); i < Math.min(currentPage + 1, pages.length); i++) {
-  //   selectedPages.push(pages[i]);
-  //   if (currentPage === i + 1) currentPointer = selectedPages.length - 1;
-  // }
   selectedPages = [
     ...selectedPages,
     ...pages.slice(Math.max(currentPage - 2, 0), Math.min(currentPage + 1, pages.length)),
@@ -42,7 +36,6 @@ export const displayPages = (currentPage, pages) => {
   if (currentPage === 1 && pages.length > 2) {
     selectedPages.push(pages[2]);
   }
-  // console.log(selectedPages);
   if (currentPage + 1 < pages.length) {
     if (currentPage + 1 < pages.length - 1) {
       if (currentPage + 1 === pages.length - 2) {
@@ -58,3 +51,20 @@ export const displayPages = (currentPage, pages) => {
   }
   return selectedPages;
 };
+
+const months = [
+  'January',
+  'Feburary',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
+
+export const getFullMonth = date => months[date.getMonth()];
