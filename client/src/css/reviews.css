@@ -1,9 +1,40 @@
 @import url('https://fonts.googleapis.com/css?family=Cabin');
 
-body {
+#reviews {
   color: #484848;
   font-family: Cabin, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
   line-height: 22px;
   letter-spacing: normal;
-  font-weight: normal; 
+  font-weight: normal;
+  max-width: 600px;
+  margin-bottom: 40px;
+}
+
+.star-ratings span{
+  display: inline-block;
+}
+
+.star-ratings svg{
+  display: block;
+}
+
+.full-star path, .half-star path{
+  fill: #008489;
+}
+
+.hidden-half-star path, .zero-star path{
+  fill: #D8D8D8;
+}
+
+.point-five-star {
+  position: relative;
+  text-align: left;
+}
+
+.half-star {
+  position: absolute;
+}
+
+.hidden-half-star {
+  position: absolute;
 }

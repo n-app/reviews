@@ -2,7 +2,17 @@ import React from 'react';
 // import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { updateQuerySortBy } from '../actions/index';
+import { makeStarElements } from '../../../../helpers/clientHelplers';
 import '../../css/rates.css';
+
+const starClassNames = {
+  containerClass: 'star-ratings room-rating',
+  fullStarClass: 'full-star room-rating',
+  pointFiveClass: 'point-five-star room-rating',
+  zeroStarClass: 'zero-star room-rating',
+  halfStarClass: 'half-star room-rating',
+  hiddenHalfStarClass: 'hidden-half-star room-rating',
+};
 
 const mapStateToProps = state => ({
   accuracy: state.overallRating.accuracy,
@@ -47,7 +57,7 @@ class Rates extends React.Component {
                   <span>{row[0]}</span>
                 </div>
                 <div className="rate-star">
-                  {Math.floor(this.props[row[1]] * 100) / 100}
+                  {makeStarElements(this.props[row[1]] / 5, 5, starClassNames)}
                 </div>
               </div>
             ))}

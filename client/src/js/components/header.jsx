@@ -2,7 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { updateQueryInput } from '../actions/index';
-import { calculateOverallRates } from '../../../../helpers/clientHelplers';
+import { calculateOverallRates, makeStarElements } from '../../../../helpers/clientHelplers';
+import '../../css/header.css';
+
+const starClassNames = {
+  containerClass: 'star-ratings overall-rating',
+  fullStarClass: 'full-star overall-rating',
+  pointFiveClass: 'point-five-star overall-rating',
+  zeroStarClass: 'zero-star overall-rating',
+  halfStarClass: 'half-star overall-rating',
+  hiddenHalfStarClass: 'hidden-half-star overall-rating',
+};
 
 const mapStateToProps = state => ({
   roomTotalReviewNumber: state.roomTotalReviewNumber,
@@ -43,7 +53,7 @@ class Header extends React.Component {
       <div className="header-banner">
         <h2 className="review-total">{this.props.roomTotalReviewNumber} Reviews</h2>
         <h2 className="rate-star">
-          {Math.round(this.props.overallRating * 100) / 100}
+          {makeStarElements(this.props.overallRating / 5, 5, starClassNames)}
         </h2>
         <input
           type="text"

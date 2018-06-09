@@ -33,3 +33,14 @@
 .rate-label span {
   font-size: 16px;
 }
+
+div.rate-star {
+  text-align: right;
+}
+
+.room-rating span{
+  font-size: 16px;
+  height: 16px;
+  width: 16px;
+  margin-right: 6px;
+}
