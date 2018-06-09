@@ -16,6 +16,7 @@ const ReviewListEntry = (props) => {
           {`${getFullMonth(date)} ${date.getFullYear()}`}
         </span>
       </div>
+      <div>{Math.round(props.review.aggregateRate * 100) / 100}</div>
       <div className="review-text">{props.review.text}</div>
     </div>
   );

@@ -2,6 +2,7 @@ import React from 'react';
 // import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { updateQuerySortBy } from '../actions/index';
+import '../../css/rates.css';
 
 const mapStateToProps = state => ({
   accuracy: state.overallRating.accuracy,
@@ -43,7 +44,7 @@ class Rates extends React.Component {
             {column.map(row => (
               <div className="rate-row" key={row[1]}>
                 <div className="rate-label">
-                  {row[0]}
+                  <span>{row[0]}</span>
                 </div>
                 <div className="rate-star">
                   {Math.floor(this.props[row[1]] * 100) / 100}

@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Cabin');
+
+body {
+  color: #484848;
+  font-family: Cabin, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+  line-height: 22px;
+  letter-spacing: normal;
+  font-weight: normal; 
+}
