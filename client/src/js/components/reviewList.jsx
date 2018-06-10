@@ -16,7 +16,6 @@ const hardcodedAvatarUrl = [
 ];
 
 const mapStateToProps = state => ({
-  roomIsFetching: state.roomIsFetching,
   pageIsFetching: state.pageIsFetching,
   pageHasErrored: state.pageHasErrored,
   roomId: state.roomId,
@@ -43,7 +42,6 @@ class ReviewList extends React.Component {
   }
 
   render() {
-    console.log('roomIsFetching: ', this.props.roomIsFetching);
     if (this.props.pageHasErrored) {
       if (this.timeout) clearTimeout(this.timeout);
       this.timeout = setTimeout(
@@ -115,7 +113,6 @@ class ReviewList extends React.Component {
 }
 
 ReviewList.propTypes = {
-  roomIsFetching: PropTypes.bool.isRequired,
   pageHasErrored: PropTypes.bool.isRequired,
   pageIsFetching: PropTypes.bool.isRequired,
   roomId: PropTypes.number.isRequired,

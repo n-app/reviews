@@ -31,7 +31,6 @@ class Reviews extends React.Component {
   }
 
   render() {
-    console.log('something');
     if (this.props.roomHasErrored) {
       if (this.timeout) clearTimeout(this.timeout);
       this.timeout = setTimeout(
