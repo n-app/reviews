@@ -63,6 +63,7 @@
 
 .search-input {
   position: relative;
+  width: 100%;
 }
 
 .search-input input {

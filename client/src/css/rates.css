@@ -44,3 +44,13 @@ div.rate-star {
   width: 16px;
   margin-right: 6px;
 }
+
+@media only screen and (max-width: 744px) {
+  .rates-list {
+    flex-direction: column;
+  }
+
+  .rates-column {
+    width: 100%;
+  }
+}
