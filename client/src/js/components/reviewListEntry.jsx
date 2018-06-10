@@ -12,28 +12,43 @@ const starClassNames = {
   hiddenHalfStarClass: 'hidden-half-star user-rating',
 };
 
-const ReviewListEntry = (props) => {
-  const date = new Date(props.review.date);
-  return (
-    <div className="reviewListEntry">
-      <div className="avatar">
-        avatar
+class ReviewListEntry extends React.Component {
+  constructor(props) {
+    super(props);
+    this.date = new Date(this.props.review.date);
+  }
+
+  render() {
+    return (
+      <div className="reviewListEntry">
+        <div className="avatar">
+          <a href={this.props.review.avatar}>
+            <img
+              src={this.props.review.avatar}
+              height="48"
+              width="48"
+              alt={`${this.props.review.userName} User Profile`}
+              Title={`${this.props.review.userName} User Profile`}
+            />
+          </a>
+        </div>
+        <div className="name-and-date">
+          <span className="username">{this.props.review.userName}</span>
+          <br />
+          <span className="review-date">
+            {`${getFullMonth(this.date)} ${this.date.getFullYear()}`}
+          </span>
+        </div>
+        <div>{makeStarElements(this.props.review.aggregateRate / 5, 5, starClassNames)}</div>
+        <div className="review-text">{this.props.review.text}</div>
       </div>
-      <div className="name-and-date">
-        <span className="username">{props.review.userName}</span>
-        <br />
-        <span className="review-date">
-          {`${getFullMonth(date)} ${date.getFullYear()}`}
-        </span>
-      </div>
-      <div>{makeStarElements(props.review.aggregateRate / 5, 5, starClassNames)}</div>
-      <div className="review-text">{props.review.text}</div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 ReviewListEntry.propTypes = {
   review: PropTypes.shape({
+    avatar: PropTypes.string,
     userName: PropTypes.string,
     date: PropTypes.string,
     aggregateRate: PropTypes.number,
