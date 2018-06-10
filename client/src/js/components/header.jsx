@@ -70,7 +70,7 @@ class Header extends React.Component {
                 v.1l5 5
                 c .3.3.8.3 1.1 0
                 s .4-.8.1-1.1"
-                fillrule="evenodd"
+                fillRule="evenodd"
               />
             </svg>
           </div>

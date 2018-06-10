@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getFullMonth, makeStarElements } from '../../../../helpers/clientHelplers';
+import { getFullMonth, makeStarElements, truncateWords } from '../../../../helpers/clientHelplers';
 import '../../css/reviewListEntry.css';
 
 const starClassNames = {
@@ -15,10 +15,20 @@ const starClassNames = {
 class ReviewListEntry extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      textTruncated: this.props.review.text.length > 300,
+      truncatedText: (
+        (this.props.review.text.length > 300)
+          ? truncateWords(this.props.review.text)
+          : null
+      ),
+    };
     this.date = new Date(this.props.review.date);
   }
 
+
   render() {
+    console.log('something2');
     return (
       <div className="reviewListEntry">
         <div className="avatar">
@@ -40,7 +50,21 @@ class ReviewListEntry extends React.Component {
           </span>
         </div>
         <div>{makeStarElements(this.props.review.aggregateRate / 5, 5, starClassNames)}</div>
-        <div className="review-text">{this.props.review.text}</div>
+        <div className="review-text">{
+          this.state.textTruncated
+            ? (
+              <span>
+                {this.state.truncatedText}
+                <span className="clickable read-more">Read more</span>
+              </span>
+            )
+            : (
+              <span>
+                {this.props.review.text}
+              </span>
+          )
+        }
+        </div>
       </div>
     );
   }

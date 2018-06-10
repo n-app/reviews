@@ -15,7 +15,7 @@ const initialState = {
   roomIsFetching: false,
   pageHasErrored: false,
   pageIsFetching: false,
-  roomId: 1001,
+  roomId: 1002,
   roomName: '',
   roomTotalReviewNumber: 0,
   overallRating: {
