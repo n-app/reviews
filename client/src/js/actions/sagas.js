@@ -88,7 +88,6 @@ export function* getRoomInfo(state) {
       state.numberReviewsPerPage,
     );
     yield cancel(task);
-
     const newState = {
       ...state,
       roomId: data.roomInfo.id,

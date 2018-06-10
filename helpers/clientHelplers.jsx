@@ -213,3 +213,11 @@ export const makeStarElements = (
   );
 };
 /* eslint-enable react/no-array-index-key */
+
+export const truncateWords = (string, maxLength) => {
+  let index = maxLength;
+  while (string[index] !== ' ') {
+    index -= 1;
+  }
+  return `${string.slice(0, index)}...`;
+};

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getFullMonth, makeStarElements } from '../../../../helpers/clientHelplers';
+import { getFullMonth, makeStarElements, truncateWords } from '../../../../helpers/clientHelplers';
 import '../../css/reviewListEntry.css';
 
 const starClassNames = {
@@ -12,11 +12,22 @@ const starClassNames = {
   hiddenHalfStarClass: 'hidden-half-star user-rating',
 };
 
+const truncateThreshold = 300;
+
 class ReviewListEntry extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      textTruncated: this.props.review.text.length > truncateThreshold,
+      truncatedText: (
+        (this.props.review.text.length > truncateThreshold)
+          ? truncateWords(this.props.review.text, truncateThreshold)
+          : null
+      ),
+    };
     this.date = new Date(this.props.review.date);
   }
+
 
   render() {
     return (
@@ -28,7 +39,7 @@ class ReviewListEntry extends React.Component {
               height="48"
               width="48"
               alt={`${this.props.review.userName} User Profile`}
-              Title={`${this.props.review.userName} User Profile`}
+              title={`${this.props.review.userName} User Profile`}
             />
           </a>
         </div>
@@ -40,7 +51,26 @@ class ReviewListEntry extends React.Component {
           </span>
         </div>
         <div>{makeStarElements(this.props.review.aggregateRate / 5, 5, starClassNames)}</div>
-        <div className="review-text">{this.props.review.text}</div>
+        <div className="review-text">{
+          this.state.textTruncated
+            ? (
+              <span>
+                {this.state.truncatedText}
+                <button
+                  className="read-more"
+                  onClick={() => { this.setState({ textTruncated: false }); }}
+                >
+                  Read more
+                </button>
+              </span>
+            )
+            : (
+              <span>
+                {this.props.review.text}
+              </span>
+          )
+        }
+        </div>
       </div>
     );
   }
