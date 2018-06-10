@@ -2,7 +2,7 @@ import React from 'react';
 // import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { updateQuerySortBy } from '../actions/index';
-import { makeStarElements } from '../../../../helpers/clientHelplers';
+import { makeStarElements } from '../../../../helpers/clientHelpers';
 import '../../css/rates.css';
 
 const starClassNames = {

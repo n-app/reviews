@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { updateQueryInput } from '../actions/index';
-import { calculateOverallRates, makeStarElements } from '../../../../helpers/clientHelplers';
+import { calculateOverallRates, makeStarElements } from '../../../../helpers/clientHelpers';
 import '../../css/header.css';
 
 const starClassNames = {

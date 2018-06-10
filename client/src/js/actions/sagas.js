@@ -3,7 +3,7 @@
 import { call, put, fork, cancel, takeLatest } from 'redux-saga/effects';
 import { updateState } from './index';
 import fetchData from '../apis/fetchData';
-import { calculatePages } from '../../../../helpers/clientHelplers';
+import { calculatePages } from '../../../../helpers/clientHelpers';
 
 
 export function* pageIsFetching(state) {

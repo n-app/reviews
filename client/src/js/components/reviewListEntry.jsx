@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getFullMonth, makeStarElements, truncateWords } from '../../../../helpers/clientHelplers';
+import { getFullMonth, makeStarElements, truncateWords } from '../../../../helpers/clientHelpers';
 import '../../css/reviewListEntry.css';
 
 const starClassNames = {
