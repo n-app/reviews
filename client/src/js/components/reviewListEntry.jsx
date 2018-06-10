@@ -12,14 +12,16 @@ const starClassNames = {
   hiddenHalfStarClass: 'hidden-half-star user-rating',
 };
 
+const truncateThreshold = 300;
+
 class ReviewListEntry extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      textTruncated: this.props.review.text.length > 300,
+      textTruncated: this.props.review.text.length > truncateThreshold,
       truncatedText: (
-        (this.props.review.text.length > 300)
-          ? truncateWords(this.props.review.text)
+        (this.props.review.text.length > truncateThreshold)
+          ? truncateWords(this.props.review.text, truncateThreshold)
           : null
       ),
     };
@@ -28,7 +30,6 @@ class ReviewListEntry extends React.Component {
 
 
   render() {
-    console.log('something2');
     return (
       <div className="reviewListEntry">
         <div className="avatar">
@@ -38,7 +39,7 @@ class ReviewListEntry extends React.Component {
               height="48"
               width="48"
               alt={`${this.props.review.userName} User Profile`}
-              Title={`${this.props.review.userName} User Profile`}
+              title={`${this.props.review.userName} User Profile`}
             />
           </a>
         </div>
@@ -55,7 +56,12 @@ class ReviewListEntry extends React.Component {
             ? (
               <span>
                 {this.state.truncatedText}
-                <span className="clickable read-more">Read more</span>
+                <button
+                  className="read-more"
+                  onClick={() => { this.setState({ textTruncated: false }); }}
+                >
+                  Read more
+                </button>
               </span>
             )
             : (
