@@ -3,7 +3,7 @@
 import { call, put, fork, cancel, takeLatest } from 'redux-saga/effects';
 import { updateState } from './index';
 import fetchData from '../apis/fetchData';
-import { calculatePages } from '../../../../helpers/clientHelplers';
+import { calculatePages } from '../../../../helpers/clientHelpers';
 
 
 export function* pageIsFetching(state) {
@@ -88,13 +88,12 @@ export function* getRoomInfo(state) {
       state.numberReviewsPerPage,
     );
     yield cancel(task);
-
     const newState = {
       ...state,
       roomId: data.roomInfo.id,
       roomName: data.roomInfo.roomName,
       roomTotalReviewNumber: data.roomInfo.totalNumberReviews,
-      overAllRating: {
+      overallRating: {
         accuracy: data.roomInfo.accuracy,
         communication: data.roomInfo.communication,
         cleanliness: data.roomInfo.cleanliness,

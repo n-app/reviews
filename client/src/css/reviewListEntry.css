@@ -1,0 +1,58 @@
+.avatar img{
+  background: #D8D8D8;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  overflow: hidden;
+}
+
+.user-profile {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: flex-start;
+}
+
+.name-and-date {
+  margin-left: 16px;
+}
+
+.username {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.user-star {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.user-rating span{
+  font-size: 12px;
+  height: 12px;
+  width: 12px;
+  margin-right: 3px;
+}
+
+.review-break {
+  border-bottom: 1px solid #DBDBDB;
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+.review-text {
+  padding-top: 16px;
+  font-size: 16px;
+}
+
+.read-more {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  color: #008489;
+}
+
+.read-more:hover {
+  text-decoration: underline;
+}

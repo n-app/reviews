@@ -17,6 +17,7 @@ describe('api call tests', () => {
         expect(roomInfo.roomInfo).toBeInstanceOf(Object);
         expect(roomInfo.reviews).toBeInstanceOf(Array);
         roomId -= 999;
+        roomInfo.roomInfo.id -= 999;
         const expectedRoomInfo = await db.queryRoomInfoByRoomId(roomId);
         expect(roomInfo.roomInfo).toEqual(expectedRoomInfo);
         const expectedReviews = await db.queryReviewsByRoomId({ roomId });
@@ -57,7 +58,12 @@ describe('api call tests', () => {
       const sortBy = ['communication', -1];
       let roomId = 1002;
       (async () => {
-        const queryReviews = await fetchData.queryReviews(roomId, keyword, sortBy, numberReviewsPerPage);
+        const queryReviews = await fetchData.queryReviews(
+          roomId,
+          keyword,
+          sortBy,
+          numberReviewsPerPage,
+        );
         expect(queryReviews).toHaveProperty('totalNumberResults');
         expect(queryReviews).toHaveProperty('reviews');
         expect(typeof queryReviews.totalNumberResults).toBe('number');

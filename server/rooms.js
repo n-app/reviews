@@ -4,6 +4,8 @@ const db = require('../database/index');
 
 const router = express.Router();
 
+const roomIdAdjustment = -1000 + 1;
+
 const getQueryParams = ({ pageonly, start, limit }) => {
   const result = {};
   result.totalNumberResults = tempStorage.totalNumberResults;
@@ -20,11 +22,12 @@ const getQueryParams = ({ pageonly, start, limit }) => {
 router.get('/:roomId', async (req, res, next) => {
   try {
     let { roomId } = req.params;
-    roomId -= 1000 - 1;
+    roomId = parseInt(roomId, 10) + roomIdAdjustment;
     if (!(tempStorage.roomInfo.id && tempStorage.roomInfo.id === roomId)) {
       const info = db.queryRoomInfoByRoomId(roomId);
       const reviews = db.queryReviewsByRoomId({ roomId });
       [tempStorage.roomInfo, tempStorage.allQueryReviews] = await Promise.all([info, reviews]);
+      tempStorage.roomInfo.id -= roomIdAdjustment;
       tempStorage.totalNumberResults = tempStorage.allQueryReviews.length;
     }
     res.status(200).json(getQueryParams(req.query));
@@ -37,7 +40,7 @@ router.get('/:roomId', async (req, res, next) => {
 router.post('/:roomId', async (req, res, next) => {
   try {
     let { roomId } = req.params;
-    roomId -= 1000 - 1;
+    roomId += roomIdAdjustment;
     const queryObj = { roomId };
     Object.assign(queryObj, req.body);
     const reviews = db.queryReviewsByRoomId(queryObj);

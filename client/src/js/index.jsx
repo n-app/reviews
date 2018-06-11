@@ -18,7 +18,7 @@ const initialState = {
   roomId: 1001,
   roomName: '',
   roomTotalReviewNumber: 0,
-  overAllRating: {
+  overallRating: {
     accuracy: 0,
     communication: 0,
     cleanliness: 0,
@@ -27,7 +27,7 @@ const initialState = {
     value: 0,
   },
   numberReviewsPerPage: 7,
-  currentPage: 0,
+  currentPage: 1,
   totalNumberResults: 0,
   reviews: [],
   pages: [],

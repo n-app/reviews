@@ -2,11 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { updateQueryInput } from '../actions/index';
-import { calculateOverAllRates } from '../../../../helpers/clientHelplers';
+import { calculateOverallRates, makeStarElements } from '../../../../helpers/clientHelpers';
+import '../../css/header.css';
+
+const starClassNames = {
+  containerClass: 'star-ratings overall-rating',
+  fullStarClass: 'full-star overall-rating',
+  pointFiveClass: 'point-five-star overall-rating',
+  zeroStarClass: 'zero-star overall-rating',
+  halfStarClass: 'half-star overall-rating',
+  hiddenHalfStarClass: 'hidden-half-star overall-rating',
+};
 
 const mapStateToProps = state => ({
   roomTotalReviewNumber: state.roomTotalReviewNumber,
-  overAllRating: calculateOverAllRates(state.overAllRating),
+  overallRating: calculateOverallRates(state.overallRating),
   queryInput: state.queryInput,
 });
 
@@ -19,6 +29,7 @@ class Header extends React.Component {
     super(props);
     this.state = {
       input: this.props.queryInput,
+      inputFocus: false,
     };
 
     this.updateQueryInput = this.props.updateQueryInput.bind(this);
@@ -41,18 +52,40 @@ class Header extends React.Component {
   render() {
     return (
       <div className="header-banner">
-        <h2>{this.props.roomTotalReviewNumber} Reviews</h2>
-        <h2>
-          {Math.round(this.props.overAllRating * 100) / 100}
-        </h2>
-        <input
-          type="text"
-          placeholder="Search reviews"
-          className="search-bar"
-          value={this.state.input}
-          onChange={this.handleSearchChange}
-          onKeyDown={this.handleKeyDown}
-        />
+        <h4 className="review-total">
+          <span>{this.props.roomTotalReviewNumber} Reviews</span>
+          <div className="total-rate-star">{makeStarElements(this.props.overallRating / 5, 5, starClassNames)}</div>
+        </h4>
+        <div className={`search-bar${this.state.inputFocus ? ' darker' : ''}`}>
+          <div className="search-icon">
+            <svg
+              viewBox="0 0 24 24"
+              role="presentation"
+              focusable="false"
+            >
+              <path
+                d="m10.4 18.2
+                c-4.2-.6-7.2-4.5-6.6-8.8.6-4.2 4.5-7.2 8.8-6.6 4.2.6 7.2 4.5 6.6 8.8-.6 4.2-4.6 7.2-8.8 6.6
+                m12.6 3.8-5-5c1.4-1.4 2.3-3.1 2.6-5.2.7-5.1-2.8-9.7-7.8-10.5-5-.7-9.7 2.8-10.5 7.9-.7 5.1 2.8 9.7 7.8 10.5 2.5.4 4.9-.3 6.7-1.7
+                v.1l5 5
+                c .3.3.8.3 1.1 0
+                s .4-.8.1-1.1"
+                fillRule="evenodd"
+              />
+            </svg>
+          </div>
+          <div className="search-input">
+            <input
+              type="text"
+              placeholder="Search reviews"
+              value={this.state.input}
+              onChange={this.handleSearchChange}
+              onKeyDown={this.handleKeyDown}
+              onFocus={() => { this.setState({ inputFocus: true }); }}
+              onBlur={() => { this.setState({ inputFocus: false }); }}
+            />
+          </div>
+        </div>
       </div>
     );
   }
@@ -60,7 +93,7 @@ class Header extends React.Component {
 
 Header.propTypes = {
   roomTotalReviewNumber: PropTypes.number.isRequired,
-  overAllRating: PropTypes.number.isRequired,
+  overallRating: PropTypes.number.isRequired,
   queryInput: PropTypes.string.isRequired,
   updateQueryInput: PropTypes.func.isRequired,
 };
