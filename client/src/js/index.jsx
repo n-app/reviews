@@ -10,7 +10,7 @@ import sagas from './actions/sagas';
 
 const initialState = {
   queryInput: '',
-  querySortBy: null,
+  querySortBy: [],
   roomHasErrored: false,
   roomIsFetching: false,
   pageHasErrored: false,
@@ -37,6 +37,7 @@ const store = configureStore(initialState); // can also pass in an initialState 
 
 store.runSaga(sagas.mySelectAPage);
 store.runSaga(sagas.mySelectARoom);
+store.runSaga(sagas.myQueryReview);
 
 ReactDOM.render(
   (

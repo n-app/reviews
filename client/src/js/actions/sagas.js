@@ -111,6 +111,29 @@ export function* getRoomInfo(state) {
   }
 }
 
+export function* getQueriedReview(state) {
+  try {
+    const task = yield fork(pageIsFetching);
+    const data = yield call(
+      fetchData.getQueriedReviews,
+      state.roomId,
+      state.queryInput,
+      state.querySortBy,
+      state.numberReviewsPerPage,
+    );
+    yield cancel(task);
+    const newState = {
+      ...state,
+      totalNumberReviews: data.totalNumberResults,
+      reviews: data.reviews,
+      pages: calculatePages(state.numberReviewsPerPage, data.totalNumberResults),
+    };
+    yield call(pageInfoFetched, newState);
+  } catch (err) {
+    throw (err);
+  }
+}
+
 export function* selectAPage(action) {
   const state = { ...action.state };
   try {
@@ -125,12 +148,24 @@ export function* selectARoom(action) {
     ...action.state,
     currentPage: 1,
     queryInput: '',
-    querySortBy: null,
+    querySortBy: [],
   };
   try {
     yield call(getRoomInfo, state);
   } catch (err) {
     yield call(roomHasErrored, state);
+  }
+}
+
+export function* queryReview(action) {
+  const state = {
+    ...action.state,
+    currentPage: 1,
+  };
+  try {
+    yield call(getQueriedReview, state);
+  } catch (err) {
+    yield call(pageHasErrored, state);
   }
 }
 
@@ -142,7 +177,12 @@ function* mySelectARoom() {
   yield takeLatest('SELECT_A_ROOM', selectARoom);
 }
 
+function* myQueryReview() {
+  yield takeLatest('QUERY_REVIEW', queryReview);
+}
+
 export default {
   mySelectAPage,
   mySelectARoom,
+  myQueryReview,
 };

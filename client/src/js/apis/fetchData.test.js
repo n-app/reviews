@@ -51,27 +51,27 @@ describe('api call tests', () => {
     });
   });
 
-  describe('queryReviews function tests', () => {
-    test('queryReviews response should have the following fetures', (done) => {
+  describe('getQueriedReviews function tests', () => {
+    test('getQueriedReviews response should have the following fetures', (done) => {
       const numberReviewsPerPage = 7;
       const keyword = 'able';
       const sortBy = ['communication', -1];
       let roomId = 1002;
       (async () => {
-        const queryReviews = await fetchData.queryReviews(
+        const queriedReviews = await fetchData.getQueriedReviews(
           roomId,
           keyword,
           sortBy,
           numberReviewsPerPage,
         );
-        expect(queryReviews).toHaveProperty('totalNumberResults');
-        expect(queryReviews).toHaveProperty('reviews');
-        expect(typeof queryReviews.totalNumberResults).toBe('number');
-        expect(queryReviews.reviews).toBeInstanceOf(Array);
+        expect(queriedReviews).toHaveProperty('totalNumberResults');
+        expect(queriedReviews).toHaveProperty('reviews');
+        expect(typeof queriedReviews.totalNumberResults).toBe('number');
+        expect(queriedReviews.reviews).toBeInstanceOf(Array);
         roomId -= 999;
         const expectedReviews = await db.queryReviewsByRoomId({ roomId, keyword, sortBy });
-        expect(queryReviews.totalNumberResults).toBe(expectedReviews.length);
-        expect(queryReviews.reviews).toEqual(expectedReviews.slice(0, numberReviewsPerPage));
+        expect(queriedReviews.totalNumberResults).toBe(expectedReviews.length);
+        expect(queriedReviews.reviews).toEqual(expectedReviews.slice(0, numberReviewsPerPage));
         done();
       })();
     });

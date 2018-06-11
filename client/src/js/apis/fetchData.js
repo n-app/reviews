@@ -29,7 +29,7 @@ const getReviewPage = async (roomId, pageNum, numberReviewsPerPage) => {
   }
 };
 
-const queryReviews = async (roomId, keyword, sortBy, numberReviewsPerPage) => {
+const getQueriedReviews = async (roomId, keyword, sortBy, numberReviewsPerPage) => {
   try {
     const url = new URL(roomUrl + roomId);
     const params = { pageonly: 1, start: 0, limit: numberReviewsPerPage };
@@ -51,6 +51,6 @@ const queryReviews = async (roomId, keyword, sortBy, numberReviewsPerPage) => {
 export default {
   getRoomInfo,
   getReviewPage,
-  queryReviews,
+  getQueriedReviews,
 };
 

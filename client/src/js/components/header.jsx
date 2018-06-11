@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { updateQueryInput } from '../actions/index';
+import { queryReview } from '../actions/index';
 import { calculateOverallRates, makeStarElements } from '../../../../helpers/clientHelpers';
 import '../../css/header.css';
 
@@ -15,13 +15,18 @@ const starClassNames = {
 };
 
 const mapStateToProps = state => ({
+  roomId: state.roomId,
   roomTotalReviewNumber: state.roomTotalReviewNumber,
   overallRating: calculateOverallRates(state.overallRating),
+  numberReviewsPerPage: state.numberReviewsPerPage,
   queryInput: state.queryInput,
+  querySortBy: state.querySortBy,
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateQueryInput: (queryInput) => { dispatch(updateQueryInput(queryInput)); },
+  queryReview: (roomId, queryInput, querySortBy, numberReviewsPerPage) => {
+    dispatch(queryReview(roomId, queryInput, querySortBy, numberReviewsPerPage));
+  },
 });
 
 class Header extends React.Component {
@@ -32,7 +37,7 @@ class Header extends React.Component {
       inputFocus: false,
     };
 
-    this.updateQueryInput = this.props.updateQueryInput.bind(this);
+    this.queryReview = this.props.queryReview.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleSearchChange = this.handleSearchChange.bind(this);
   }
@@ -45,7 +50,12 @@ class Header extends React.Component {
 
   handleKeyDown(event) {
     if (event.which === 13) {
-      this.updateQueryInput(event.target.value);
+      this.queryReview(
+        this.props.roomId,
+        event.target.value,
+        this.props.querySortBy,
+        this.props.numberReviewsPerPage,
+      );
     }
   }
 
@@ -92,10 +102,13 @@ class Header extends React.Component {
 }
 
 Header.propTypes = {
+  roomId: PropTypes.number.isRequired,
   roomTotalReviewNumber: PropTypes.number.isRequired,
   overallRating: PropTypes.number.isRequired,
+  numberReviewsPerPage: PropTypes.number.isRequired,
   queryInput: PropTypes.string.isRequired,
-  updateQueryInput: PropTypes.func.isRequired,
+  querySortBy: PropTypes.arrayOf(PropTypes.any).isRequired,
+  queryReview: PropTypes.func.isRequired,
 };
 
 const ConnectedHeader = connect(mapStateToProps, mapDispatchToProps)(Header);

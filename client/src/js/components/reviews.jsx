@@ -40,9 +40,6 @@ class Reviews extends React.Component {
       );
       return null;
     }
-    if (this.props.roomIsFetching) {
-      return <div>Fetching Room Info.</div>;
-    }
     return (
       <div>
         <div className={this.props.roomIsFetching ? 'loader' : ''} />
