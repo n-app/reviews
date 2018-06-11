@@ -15,7 +15,7 @@ const initialState = {
   roomIsFetching: false,
   pageHasErrored: false,
   pageIsFetching: false,
-  roomId: 1001,
+  roomId: Math.floor(Math.random() * 100) + 1000,
   roomName: '',
   roomTotalReviewNumber: 0,
   overallRating: {
