@@ -44,10 +44,13 @@ class Reviews extends React.Component {
       return <div>Fetching Room Info.</div>;
     }
     return (
-      <div className="reviews">
-        <Header />
-        <Rates />
-        <ReviewList />
+      <div>
+        <div className={this.props.roomIsFetching ? 'loader' : ''} />
+        <div className={`reviews${this.props.roomIsFetching ? ' grey-out' : ''}`}>
+          <Header />
+          <Rates />
+          <ReviewList />
+        </div>
       </div>
     );
   }

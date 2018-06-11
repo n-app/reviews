@@ -54,69 +54,69 @@ class ReviewList extends React.Component {
         ),
         5000,
       );
-      return <div>Fetching Page Error.<br />Try later</div>;
-    }
-    if (this.props.pageIsFetching) {
-      return <div>Fetching Review Page.</div>;
+      return null;
     }
     return (
       <div>
-        <div className="review-list">
-          {this.props.reviews.map(review => (
-            <ReviewListEntry review={review} key={`${review.userName}_${review.date}`} />
-          ))}
-        </div>
-        <div className="pagination">
-          {this.props.selectedPages.map((item, index) => {
-            /* eslint-disable react/no-array-index-key */
-            if (item[0] === '...') {
-              return (
-                <div className="page-spread" key={`...${index}`}>...</div>
-              );
-            }
-            /* eslint-enable react/no-array-index-key */
-            if (item[0] === '<') {
+        <div className={this.props.pageIsFetching ? 'loader' : ''} />
+        <div className={this.props.pageIsFetching ? 'grey-out' : ''}>
+          <div className="review-list">
+            {this.props.reviews.map(review => (
+              <ReviewListEntry review={review} key={`${review.userName}_${review.date}`} />
+            ))}
+          </div>
+          <div className="pagination">
+            {this.props.selectedPages.map((item, index) => {
+              /* eslint-disable react/no-array-index-key */
+              if (item[0] === '...') {
+                return (
+                  <div className="page-spread" key={`...${index}`}>...</div>
+                );
+              }
+              /* eslint-enable react/no-array-index-key */
+              if (item[0] === '<') {
+                return (
+                  <button
+                    className="page-button prev-page"
+                    key={item[0]}
+                    onClick={() => { this.handlePageClick(item[1][0]); }}
+                  >
+                    &#9664;
+                  </button>
+                );
+              }
+              if (item[0] === '>') {
+                return (
+                  <button
+                    className="page-button next-page"
+                    key={item[0]}
+                    onClick={() => { this.handlePageClick(item[1][0]); }}
+                  >
+                    &#9654;
+                  </button>
+                );
+              }
+              if (item[0] === this.props.currentPage) {
+                return (
+                  <button
+                    className="page-button active"
+                    key={item[0]}
+                  >
+                    {item[0]}
+                  </button>
+                );
+              }
               return (
                 <button
-                  className="page-button prev-page"
+                  className="page-button numbered"
                   key={item[0]}
-                  onClick={() => { this.handlePageClick(item[1][0]); }}
-                >
-                  &#9664;
-                </button>
-              );
-            }
-            if (item[0] === '>') {
-              return (
-                <button
-                  className="page-button next-page"
-                  key={item[0]}
-                  onClick={() => { this.handlePageClick(item[1][0]); }}
-                >
-                  &#9654;
-                </button>
-              );
-            }
-            if (item[0] === this.props.currentPage) {
-              return (
-                <button
-                  className="page-button active"
-                  key={item[0]}
+                  onClick={() => { this.handlePageClick(item[0]); }}
                 >
                   {item[0]}
                 </button>
               );
-            }
-            return (
-              <button
-                className="page-button numbered"
-                key={item[0]}
-                onClick={() => { this.handlePageClick(item[0]); }}
-              >
-                {item[0]}
-              </button>
-            );
-          })}
+            })}
+          </div>
         </div>
       </div>
     );
