@@ -5,15 +5,9 @@
   overflow: hidden;
 }
 
-.read-more {
-  background: none;
-  border: none;
-  padding: 0;
-  font: inherit;
-  cursor: pointer;
-  outline: inherit;
-  text-decoration: underline;
-  color: #008489;
+.user-star {
+  margin-top: 8px;
+  margin-bottom: 8px;
 }
 
 .user-rating span{
@@ -21,4 +15,22 @@
   height: 12px;
   width: 12px;
   margin-right: 3px;
+}
+
+.review-text {
+  font-size: 16px;
+}
+
+.read-more {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  color: #008489;
+}
+
+.read-more:hover {
+  text-decoration: underline;
 }

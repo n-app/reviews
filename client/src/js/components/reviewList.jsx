@@ -66,7 +66,7 @@ class ReviewList extends React.Component {
             <ReviewListEntry review={review} key={`${review.userName}_${review.date}`} />
           ))}
         </div>
-        <div className="page-buttons">
+        <div className="pagination">
           {this.props.selectedPages.map((item, index) => {
             /* eslint-disable react/no-array-index-key */
             if (item[0] === '...') {
@@ -82,7 +82,7 @@ class ReviewList extends React.Component {
                   key={item[0]}
                   onClick={() => { this.handlePageClick(item[1][0]); }}
                 >
-                  &lt;
+                  &#9664;
                 </button>
               );
             }
@@ -93,13 +93,23 @@ class ReviewList extends React.Component {
                   key={item[0]}
                   onClick={() => { this.handlePageClick(item[1][0]); }}
                 >
-                  &gt;
+                  &#9654;
+                </button>
+              );
+            }
+            if (item[0] === this.props.currentPage) {
+              return (
+                <button
+                  className="page-button active"
+                  key={item[0]}
+                >
+                  {item[0]}
                 </button>
               );
             }
             return (
               <button
-                className="page-button"
+                className="page-button numbered"
                 key={item[0]}
                 onClick={() => { this.handlePageClick(item[0]); }}
               >

@@ -43,7 +43,7 @@ class Reviews extends React.Component {
       return <div>Fetching Room Info.</div>;
     }
     return (
-      <div>
+      <div className="reviews">
         <Header />
         <Rates />
         <ReviewList />

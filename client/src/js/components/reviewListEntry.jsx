@@ -32,25 +32,27 @@ class ReviewListEntry extends React.Component {
   render() {
     return (
       <div className="reviewListEntry">
-        <div className="avatar">
-          <a href={this.props.review.avatar}>
-            <img
-              src={this.props.review.avatar}
-              height="48"
-              width="48"
-              alt={`${this.props.review.userName} User Profile`}
-              title={`${this.props.review.userName} User Profile`}
-            />
-          </a>
+        <div className="user-profile">
+          <div className="avatar">
+            <a href={this.props.review.avatar}>
+              <img
+                src={this.props.review.avatar}
+                height="48"
+                width="48"
+                alt={`${this.props.review.userName} User Profile`}
+                title={`${this.props.review.userName} User Profile`}
+              />
+            </a>
+          </div>
+          <div className="name-and-date">
+            <span className="username">{this.props.review.userName}</span>
+            <br />
+            <span className="review-date">
+              {`${getFullMonth(this.date)} ${this.date.getFullYear()}`}
+            </span>
+          </div>
         </div>
-        <div className="name-and-date">
-          <span className="username">{this.props.review.userName}</span>
-          <br />
-          <span className="review-date">
-            {`${getFullMonth(this.date)} ${this.date.getFullYear()}`}
-          </span>
-        </div>
-        <div>{makeStarElements(this.props.review.aggregateRate / 5, 5, starClassNames)}</div>
+        <div className="user-star">{makeStarElements(this.props.review.aggregateRate / 5, 5, starClassNames)}</div>
         <div className="review-text">{
           this.state.textTruncated
             ? (
