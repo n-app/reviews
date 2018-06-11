@@ -15,6 +15,7 @@ export const calculatePages = (numberReviewsPerPage, totalNumberReviews) => {
 
 export const displayPages = (currentPage, pages) => {
   let selectedPages = [];
+  if (!pages.length) return selectedPages;
   if (currentPage !== 1) {
     selectedPages.push(['<', pages[currentPage - 2]]);
   }
