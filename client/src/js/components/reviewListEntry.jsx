@@ -73,6 +73,7 @@ class ReviewListEntry extends React.Component {
           )
         }
         </div>
+        <div className="review-break" />
       </div>
     );
   }
