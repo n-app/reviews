@@ -7,7 +7,21 @@ jobs:
   build:
     docker:
       # specify the version you desire here
+      - image: mysql 8.0
+        environment: 
+          MYSQL_HOST: 127.0.0.1
+          MYSQL_DB: nappbnbreviews
+          MYSQL_ROOT_HOST: %
+          MYSQL_USER: root
+          MYSQL_ALLOW_EMPTY_PASSWORD: true
+          MYSQL_PASSWORD:
+        command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_bin --innodb-large-prefix=true --innodb-file-format=Barracuda
+
       - image: circleci/node:10.2.1
+        environment: 
+          MYSQL_USER: root
+          MYSQL_ALLOW_EMPTY_PASSWORD: true
+
     working_directory: ~/repo
 
     steps:
@@ -21,12 +35,14 @@ jobs:
           - v1-dependencies-
 
       - run: npm install
+      - run: mysql -h 127.0.0.1 -u root < schema.sql
 
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-        
+      
+      
       # run tests!
       - run: npm test
 
