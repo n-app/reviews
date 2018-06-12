@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { updateQueryInput } from '../actions/index';
-import { calculateOverallRates, makeStarElements } from '../../../../helpers/clientHelpers';
+import { queryReview } from '../actions/index';
+import { chevronDownSVG, chevronUpSVG, searchIconSvg, calculateOverallRates, makeStarElements } from '../../../../helpers/clientHelpers';
 import '../../css/header.css';
 
 const starClassNames = {
@@ -15,13 +15,18 @@ const starClassNames = {
 };
 
 const mapStateToProps = state => ({
+  roomId: state.roomId,
   roomTotalReviewNumber: state.roomTotalReviewNumber,
   overallRating: calculateOverallRates(state.overallRating),
+  numberReviewsPerPage: state.numberReviewsPerPage,
   queryInput: state.queryInput,
+  querySortBy: state.querySortBy,
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateQueryInput: (queryInput) => { dispatch(updateQueryInput(queryInput)); },
+  queryReview: (roomId, queryInput, querySortBy, numberReviewsPerPage) => {
+    dispatch(queryReview(roomId, queryInput, querySortBy, numberReviewsPerPage));
+  },
 });
 
 class Header extends React.Component {
@@ -32,9 +37,21 @@ class Header extends React.Component {
       inputFocus: false,
     };
 
-    this.updateQueryInput = this.props.updateQueryInput.bind(this);
+    this.queryReview = this.props.queryReview.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleSearchChange = this.handleSearchChange.bind(this);
+    this.handleRatingClick = this.handleRatingClick.bind(this);
+  }
+
+  handleKeyDown(event) {
+    if (event.which === 13) {
+      this.queryReview(
+        this.props.roomId,
+        event.target.value,
+        this.props.querySortBy,
+        this.props.numberReviewsPerPage,
+      );
+    }
   }
 
   handleSearchChange(event) {
@@ -43,10 +60,29 @@ class Header extends React.Component {
     });
   }
 
-  handleKeyDown(event) {
-    if (event.which === 13) {
-      this.updateQueryInput(event.target.value);
+  handleRatingClick() {
+    let sortBy;
+    if (this.props.querySortBy.length && this.props.querySortBy[0] === 'aggregateRate') {
+      sortBy = {
+        '-1': ['aggregateRate', 1],
+        1: [],
+      }[this.props.querySortBy[1]];
+    } else {
+      sortBy = ['aggregateRate', -1];
     }
+    this.props.queryReview(
+      this.props.roomId,
+      this.props.queryInput,
+      sortBy,
+      this.props.numberReviewsPerPage,
+    );
+  }
+
+  chevronIcon() {
+    if (this.props.querySortBy.length && (this.props.querySortBy[0] === 'aggregateRate')) {
+      return (this.props.querySortBy[1] === -1) ? chevronDownSVG : chevronUpSVG;
+    }
+    return null;
   }
 
   render() {
@@ -54,25 +90,17 @@ class Header extends React.Component {
       <div className="header-banner">
         <h4 className="review-total">
           <span>{this.props.roomTotalReviewNumber} Reviews</span>
-          <div className="total-rate-star">{makeStarElements(this.props.overallRating / 5, 5, starClassNames)}</div>
+          <button
+            className="aggregate-rating"
+            onClick={this.handleRatingClick}
+          >
+            <div className="total-rate-star">{makeStarElements(this.props.overallRating / 5, 5, starClassNames)}</div>
+            <span className="chevron-icon">{this.chevronIcon()}</span>
+          </button>
         </h4>
         <div className={`search-bar${this.state.inputFocus ? ' darker' : ''}`}>
           <div className="search-icon">
-            <svg
-              viewBox="0 0 24 24"
-              role="presentation"
-              focusable="false"
-            >
-              <path
-                d="m10.4 18.2
-                c-4.2-.6-7.2-4.5-6.6-8.8.6-4.2 4.5-7.2 8.8-6.6 4.2.6 7.2 4.5 6.6 8.8-.6 4.2-4.6 7.2-8.8 6.6
-                m12.6 3.8-5-5c1.4-1.4 2.3-3.1 2.6-5.2.7-5.1-2.8-9.7-7.8-10.5-5-.7-9.7 2.8-10.5 7.9-.7 5.1 2.8 9.7 7.8 10.5 2.5.4 4.9-.3 6.7-1.7
-                v.1l5 5
-                c .3.3.8.3 1.1 0
-                s .4-.8.1-1.1"
-                fillRule="evenodd"
-              />
-            </svg>
+            {searchIconSvg}
           </div>
           <div className="search-input">
             <input
@@ -92,10 +120,13 @@ class Header extends React.Component {
 }
 
 Header.propTypes = {
+  roomId: PropTypes.number.isRequired,
   roomTotalReviewNumber: PropTypes.number.isRequired,
   overallRating: PropTypes.number.isRequired,
+  numberReviewsPerPage: PropTypes.number.isRequired,
   queryInput: PropTypes.string.isRequired,
-  updateQueryInput: PropTypes.func.isRequired,
+  querySortBy: PropTypes.arrayOf(PropTypes.any).isRequired,
+  queryReview: PropTypes.func.isRequired,
 };
 
 const ConnectedHeader = connect(mapStateToProps, mapDispatchToProps)(Header);

@@ -17,11 +17,76 @@
   margin-bottom: 12px;
   padding-top: 2px;
   padding-bottom: 2px;
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.review-total>span {
+  display: inline-block;
+  margin-right: 16px;
+}
+
+.aggregate-rating {
+  font-size: 18px;
+  border: 0;
+  color: inherit;
+  outline: none;
+  background-color: white;
+  position: relative;
+  min-height: 1px;
+  cursor: pointer;
+  display: flex;
+  flex-flow: row nowrap;
+  -webkit-transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.aggregate-rating::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  box-shadow: 0 5px 12px #888888;
+  -webkit-transition: all 0.1s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: all 0.1s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.aggregate-rating::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  box-shadow: 0 0px 12px #888888;
+}
+
+.aggregate-rating:hover {
+  -webkit-transform: translate(-2px, -3px);
+  transform: translate(-2px, -3px);
+}
+
+.aggregate-rating:hover::after {
+  opacity: 1;
+}
+
+.aggregate-rating:active::after {
+  opacity: 0;
+}
+
+.aggregate-rating:active::before {
+  opacity: 1;
 }
 
 .total-rate-star {
   display: inline-block;
-  margin-left: 16px;
+  margin-right: 10px;
 }
 
 .overall-rating span{

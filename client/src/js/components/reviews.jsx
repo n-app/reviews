@@ -9,6 +9,7 @@ import { selectARoom } from '../actions/index';
 
 const mapStateToProps = state => ({
   roomIsFetching: state.roomIsFetching,
+  pageHasErrored: state.pageHasErrored,
   roomHasErrored: state.roomHasErrored,
   numberReviewsPerPage: state.numberReviewsPerPage,
   roomId: state.roomId,
@@ -31,22 +32,22 @@ class Reviews extends React.Component {
   }
 
   render() {
-    if (this.props.roomHasErrored) {
+    if (this.props.roomHasErrored || this.props.pageHasErrored) {
       if (this.timeout) clearTimeout(this.timeout);
       this.timeout = setTimeout(
         this.props.selectARoom.bind(this, this.props.roomId, this.props.numberReviewsPerPage),
         5000,
       );
-      return <div>Fetching Room Error.<br />Try later</div>;
-    }
-    if (this.props.roomIsFetching) {
-      return <div>Fetching Room Info.</div>;
+      return null;
     }
     return (
-      <div className="reviews">
-        <Header />
-        <Rates />
-        <ReviewList />
+      <div>
+        <div className={this.props.roomIsFetching ? 'loader' : ''} />
+        <div className={`reviews${this.props.roomIsFetching ? ' grey-out' : ''}`}>
+          <Header />
+          <Rates />
+          <ReviewList />
+        </div>
       </div>
     );
   }
@@ -54,6 +55,7 @@ class Reviews extends React.Component {
 
 Reviews.propTypes = {
   roomHasErrored: PropTypes.bool.isRequired,
+  pageHasErrored: PropTypes.bool.isRequired,
   roomIsFetching: PropTypes.bool.isRequired,
   roomId: PropTypes.number.isRequired,
   numberReviewsPerPage: PropTypes.number.isRequired,

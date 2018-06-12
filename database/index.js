@@ -64,7 +64,7 @@ const queryReviewsByRoomId = async (queryObj) => {
     '(select users.userName, users.avatar, reviews.date, reviews.accuracy, reviews.communication, reviews.cleanliness, ' +
     'reviews.location, reviews.checkIn, reviews.value, reviews.text ' +
     `FROM reviews INNER JOIN users ON users.id = reviews.userId WHERE reviews.roomId = ${queryObj.roomId}) AS candidates`;
-  if (queryObj.keyword) {
+  if (queryObj.keyword || queryObj.keyword === 0) {
     sql += ` WHERE text LIKE "%${queryObj.keyword}%"`;
   }
   sql += ' ORDER BY ';

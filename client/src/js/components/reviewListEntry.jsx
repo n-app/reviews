@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getFullMonth, makeStarElements, truncateWords } from '../../../../helpers/clientHelpers';
+import { flagSvg, getFullMonth, makeStarElements, truncateWords } from '../../../../helpers/clientHelpers';
 import '../../css/reviewListEntry.css';
 
 const starClassNames = {
@@ -31,7 +31,7 @@ class ReviewListEntry extends React.Component {
 
   render() {
     return (
-      <div className="reviewListEntry">
+      <div className="review-list-entry">
         <div className="user-profile">
           <div className="avatar">
             <a href={this.props.review.avatar}>
@@ -50,6 +50,11 @@ class ReviewListEntry extends React.Component {
             <span className="review-date">
               {`${getFullMonth(this.date)} ${this.date.getFullYear()}`}
             </span>
+          </div>
+          <div className="flag">
+            <button className="flag-button">
+              {flagSvg}
+            </button>
           </div>
         </div>
         <div className="user-star">{makeStarElements(this.props.review.aggregateRate / 5, 5, starClassNames)}</div>

@@ -10,12 +10,12 @@ import sagas from './actions/sagas';
 
 const initialState = {
   queryInput: '',
-  querySortBy: null,
+  querySortBy: [],
   roomHasErrored: false,
   roomIsFetching: false,
   pageHasErrored: false,
   pageIsFetching: false,
-  roomId: 1001,
+  roomId: Math.floor(Math.random() * 100) + 1000,
   roomName: '',
   roomTotalReviewNumber: 0,
   overallRating: {
@@ -37,6 +37,7 @@ const store = configureStore(initialState); // can also pass in an initialState 
 
 store.runSaga(sagas.mySelectAPage);
 store.runSaga(sagas.mySelectARoom);
+store.runSaga(sagas.myQueryReview);
 
 ReactDOM.render(
   (
