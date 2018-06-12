@@ -23,7 +23,7 @@ router.get('/:roomId', async (req, res, next) => {
   try {
     let { roomId } = req.params;
     roomId = parseInt(roomId, 10) + roomIdAdjustment;
-    if (!(tempStorage.roomInfo.id && tempStorage.roomInfo.id === roomId)) {
+    if (!(tempStorage.roomInfo.id || tempStorage.roomInfo.id === roomId)) {
       const info = db.queryRoomInfoByRoomId(roomId);
       const reviews = db.queryReviewsByRoomId({ roomId });
       [tempStorage.roomInfo, tempStorage.allQueryReviews] = await Promise.all([info, reviews]);
