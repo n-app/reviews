@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: mysql 8.0
+      - image: mysql 5.7
         environment: 
           MYSQL_DATABASE: nappbnbreviews
           MYSQL_USER: root
