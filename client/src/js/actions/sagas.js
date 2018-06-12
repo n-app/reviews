@@ -3,9 +3,8 @@
 import { call, put, fork, cancel, takeLatest } from 'redux-saga/effects';
 import { updateState } from './index';
 import fetchData from '../apis/fetchData';
-import { calculatePages } from '../../../../helpers/clientHelpers';
+import { calculatePages, scrollIt } from '../../../../helpers/clientHelpers';
 
-// const destination = document.querySelector('.review-list');
 
 export function* pageIsFetching(state) {
   const newState = {
@@ -75,8 +74,8 @@ export function* getReviewPage(state) {
       ...data,
     };
     yield call(pageInfoFetched, newState);
-    console.log('something');
-    // scrollIt(destination, 300, 'easeInOutQuad');
+    const destination = document.querySelector('.review-list');
+    scrollIt(destination, 300, 'easeInOutQuad');
   } catch (err) {
     throw (err);
   }
