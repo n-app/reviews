@@ -51,7 +51,6 @@
   height: 100%;
   width: 100%;
   opacity: 0;
-  
   box-shadow: 0 5px 12px #888888;
   -webkit-transition: all 0.1s cubic-bezier(0.165, 0.84, 0.44, 1);
   transition: all 0.1s cubic-bezier(0.165, 0.84, 0.44, 1);
@@ -68,7 +67,6 @@
   opacity: 0;
   box-shadow: 0 0px 12px #888888;
 }
-
 
 .rate-label:hover {
   -webkit-transform: translate(-2px, -3px);
@@ -95,12 +93,6 @@
 .rate-label span:hover {
   color: #008489;
   text-decoration: underline;
-}
-
-.chevron-icon svg{
-  display: block;
-  width: 1em;
-  height: 1em;
 }
 
 .rate-star {

@@ -36,7 +36,6 @@ const mapDispatchToProps = dispatch => ({
 class Rates extends React.Component {
   constructor(props) {
     super(props);
-    this.sortBy = this.props.querySortBy;
     this.rates = [
       [
         ['Accuracy', 'accuracy'],
@@ -49,22 +48,18 @@ class Rates extends React.Component {
         ['Value', 'value'],
       ],
     ];
-    this.state = {
-      sortBy: [],
-    };
   }
 
   handleLabelClick(label) {
     let sortBy;
-    if (this.state.sortBy.length && this.state.sortBy[0] === label) {
+    if (this.props.querySortBy.length && this.props.querySortBy[0] === label) {
       sortBy = {
         '-1': [label, 1],
         1: [],
-      }[this.state.sortBy[1]];
+      }[this.props.querySortBy[1]];
     } else {
       sortBy = [label, -1];
     }
-    this.setState({ sortBy });
     this.props.queryReview(
       this.props.roomId,
       this.props.queryInput,
@@ -74,8 +69,8 @@ class Rates extends React.Component {
   }
 
   cheveronIcon(label) {
-    if (this.state.sortBy.length && (label === this.state.sortBy[0])) {
-      return (this.state.sortBy[1] === -1) ? chevronDownSVG : chevronUpSVG;
+    if (this.props.querySortBy.length && (label === this.props.querySortBy[0])) {
+      return (this.props.querySortBy[1] === -1) ? chevronDownSVG : chevronUpSVG;
     }
     return null;
   }

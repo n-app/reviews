@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { queryReview } from '../actions/index';
-import { searchIconSvg, calculateOverallRates, makeStarElements } from '../../../../helpers/clientHelpers';
+import { chevronDownSVG, chevronUpSVG, searchIconSvg, calculateOverallRates, makeStarElements } from '../../../../helpers/clientHelpers';
 import '../../css/header.css';
 
 const starClassNames = {
@@ -40,12 +40,7 @@ class Header extends React.Component {
     this.queryReview = this.props.queryReview.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleSearchChange = this.handleSearchChange.bind(this);
-  }
-
-  handleSearchChange(event) {
-    this.setState({
-      input: event.target.value,
-    });
+    this.handleRatingClick = this.handleRatingClick.bind(this);
   }
 
   handleKeyDown(event) {
@@ -59,12 +54,49 @@ class Header extends React.Component {
     }
   }
 
+  handleSearchChange(event) {
+    this.setState({
+      input: event.target.value,
+    });
+  }
+
+  handleRatingClick() {
+    let sortBy;
+    if (this.props.querySortBy.length && this.props.querySortBy[0] === 'aggregateRate') {
+      sortBy = {
+        '-1': ['aggregateRate', 1],
+        1: [],
+      }[this.props.querySortBy[1]];
+    } else {
+      sortBy = ['aggregateRate', -1];
+    }
+    this.props.queryReview(
+      this.props.roomId,
+      this.props.queryInput,
+      sortBy,
+      this.props.numberReviewsPerPage,
+    );
+  }
+
+  chevronIcon() {
+    if (this.props.querySortBy.length && (this.props.querySortBy[0] === 'aggregateRate')) {
+      return (this.props.querySortBy[1] === -1) ? chevronDownSVG : chevronUpSVG;
+    }
+    return null;
+  }
+
   render() {
     return (
       <div className="header-banner">
         <h4 className="review-total">
           <span>{this.props.roomTotalReviewNumber} Reviews</span>
-          <div className="total-rate-star">{makeStarElements(this.props.overallRating / 5, 5, starClassNames)}</div>
+          <button
+            className="aggregate-rating"
+            onClick={this.handleRatingClick}
+          >
+            <div className="total-rate-star">{makeStarElements(this.props.overallRating / 5, 5, starClassNames)}</div>
+            <span className="chevron-icon">{this.chevronIcon()}</span>
+          </button>
         </h4>
         <div className={`search-bar${this.state.inputFocus ? ' darker' : ''}`}>
           <div className="search-icon">

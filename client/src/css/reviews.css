@@ -55,8 +55,16 @@ body {
   display: inline-block;
 }
 
+.chevron-icon svg{
+  display: block;
+  width: 1em;
+  height: 1em;
+}
+
 .star-ratings svg{
   display: block;
+  width: 1em;
+  height: 1em;
 }
 
 .full-star path, .half-star path{
