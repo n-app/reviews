@@ -30,14 +30,14 @@ export const displayPages = (currentPage, pages) => {
       }
     }
   }
-  if ((currentPage === pages.length) && pages.length > 3) {
+  if ((currentPage === pages.length) && pages.length > 4) {
     selectedPages.push(pages[pages.length - 3]);
   }
   selectedPages = [
     ...selectedPages,
     ...pages.slice(Math.max(currentPage - 2, 0), Math.min(currentPage + 1, pages.length)),
   ];
-  if (currentPage === 1 && pages.length > 3) {
+  if (currentPage === 1 && pages.length > 4) {
     selectedPages.push(pages[2]);
   }
   if (currentPage + 1 < pages.length) {

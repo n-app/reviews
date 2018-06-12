@@ -65,7 +65,7 @@
 
 .flag-button {
   padding: 4px;
-  margin: -4px;
+  margin: 4px;
   border: 0;
   cursor: pointer;
 }

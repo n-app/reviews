@@ -24,14 +24,20 @@
   margin-bottom: 12px;
 }
 
-.rate-label, .rate-star {
+.rate-label {
+  border: 0;
+  color: inherit;
+  outline: none;
   background-color: white;
   position: relative;
   padding-left: 8px;
   padding-right: 8px;
   min-height: 1px;
   cursor: pointer;
-  width: 50%;
+  width: 60%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
   -webkit-transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
   transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
@@ -45,6 +51,7 @@
   height: 100%;
   width: 100%;
   opacity: 0;
+  
   box-shadow: 0 5px 12px #888888;
   -webkit-transition: all 0.1s cubic-bezier(0.165, 0.84, 0.44, 1);
   transition: all 0.1s cubic-bezier(0.165, 0.84, 0.44, 1);
@@ -60,8 +67,6 @@
   width: 100%;
   opacity: 0;
   box-shadow: 0 0px 12px #888888;
-  -webkit-transition: all 0.01s cubic-bezier(0.165, 0.84, 0.44, 1);
-  transition: all 0.01s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 
@@ -84,6 +89,7 @@
 
 .rate-label span {
   font-size: 16px;
+  display: inline-block;
 }
 
 .rate-label span:hover {
@@ -91,8 +97,19 @@
   text-decoration: underline;
 }
 
-div.rate-star {
+.chevron-icon svg{
+  display: block;
+  width: 1em;
+  height: 1em;
+}
+
+.rate-star {
+  padding-left: 8px;
+  padding-right: 8px;
+  min-height: 1px;
+  width: 40%;
   text-align: right;
+
 }
 
 .room-rating span{
