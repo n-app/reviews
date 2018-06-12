@@ -1,3 +1,16 @@
+.user-profile {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+}
+
 .avatar img{
   background: #D8D8D8;
   border-radius: 50%;
@@ -5,20 +18,42 @@
   overflow: hidden;
 }
 
-.user-profile {
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: flex-start;
-}
-
 .name-and-date {
   margin-left: 16px;
+  width: 100%;
 }
 
 .username {
   font-size: 16px;
   font-weight: 600;
 }
+
+.flag {
+  flex: 1 auto;
+}
+
+.flag-button {
+  padding: 4px;
+  margin: -4px;
+  border: 0;
+  cursor: pointer;
+}
+
+.flag-button {
+  outline: none;
+}
+
+.flag-button svg {
+  display: block;
+  fill: #767676;
+  width: 11px;
+  height: 11px;
+}
+
+.flag-button svg:hover {
+  fill: #484848;
+}
+
 
 .user-star {
   margin-top: 8px;
