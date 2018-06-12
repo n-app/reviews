@@ -31,7 +31,7 @@ class ReviewListEntry extends React.Component {
 
   render() {
     return (
-      <div className="reviewListEntry">
+      <div className="review-list-entry">
         <div className="user-profile">
           <div className="avatar">
             <a href={this.props.review.avatar}>
