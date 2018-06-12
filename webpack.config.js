@@ -4,7 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   entry: {
-    main: ['babel-polyfill', './client/src/js/index.jsx'],
+    reviews: ['babel-polyfill', './client/src/js/index.jsx'],
   },
   resolve: { extensions: ['.js', '.jsx'] },
   output: {
