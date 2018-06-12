@@ -3,7 +3,7 @@
 import { call, put, fork, cancel, takeLatest } from 'redux-saga/effects';
 import { updateState } from './index';
 import fetchData from '../apis/fetchData';
-import { calculatePages } from '../../../../helpers/clientHelpers';
+import { calculatePages, scrollIt } from '../../../../helpers/clientHelpers';
 
 
 export function* pageIsFetching(state) {
@@ -14,6 +14,8 @@ export function* pageIsFetching(state) {
   };
 
   yield put(updateState(newState));
+  const destination = document.querySelector('.review-list');
+  scrollIt(destination, 300, 'easeInOutQuad');
 }
 
 export function* roomIsFetching(state) {
