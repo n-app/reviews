@@ -36,7 +36,7 @@ jobs:
           - v1-dependencies-
 
       - run: npm install
-      - run: mysql -h 127.0.0.1 -u root < schema.sql
+      # - run: mysql -h 127.0.0.1 -u root < schema.sql
 
       - save_cache:
           paths:
