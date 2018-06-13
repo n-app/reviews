@@ -1,13 +1,19 @@
 # Project Name
 
-> Project description
+**Nappbnb**
+
+> An airbnb clone room listing page including four main components:
+> * description-listing
+> * booking-servie
+> * reviews
+> * filter-listing
 
 ## Related Projects
 
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
+  - https://github.com/n-app/N-appbnb-description-listing
+  - https://github.com/n-app/booking-service
+  - https://github.com/n-app/reviews
+  - https://github.com/n-app/filter-listings-ryan
 
 ## Table of Contents
 
@@ -17,14 +23,20 @@
 
 ## Usage
 
-> Some usage instructions
+> clone the github repo to your local drive
+> Form within in the root directory:
+```sh
+npm run react-dev
+npm run dev-server
+```
 
 ## Requirements
 
 An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
+(not applicable)
 
-- Node 6.13.0
-- etc
+- Node 10.2.1
+- mysql 5.7
 
 ## Development
 
@@ -33,7 +45,13 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 From within the root directory:
 
 ```sh
-npm install -g webpack
 npm install
 ```
 
+### Inserting initial mock data
+
+From within the root directory:
+
+```sh
+mysql -u [username] -p [password] < database/schema.sql
+```
