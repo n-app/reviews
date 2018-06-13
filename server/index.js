@@ -37,7 +37,7 @@ app.use((req, res, next) => {
 app.use(express.static('public'));
 app.get('/favicon.ico', (req, res) => res.status(204));
 
-// handel /reviews routes
+// handle /reviews routes
 app.use('/reviews', reviewsRoute);
 
 // handle error
@@ -62,3 +62,4 @@ app.use((error, req, res, next) => {
 const port = process.env.port || 3003;
 const server = http.createServer(app);
 server.listen(port);
+console.log(`reviews listening on ${port}`);
