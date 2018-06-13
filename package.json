@@ -20,6 +20,7 @@
     "prop-types": "^15.6.1",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
+    "react-image-gallery": "^0.8.8",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",
     "redux-saga": "^0.16.0"
@@ -52,7 +53,7 @@
   "main": "server/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/n-app/reviews.git"
+    "url": "https://github.com/n-app/reviews"
   },
   "keywords": [
     "airbnb",
