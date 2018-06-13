@@ -15,6 +15,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // handle cors
+/* eslint-disable consistent-return */
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header(
@@ -30,6 +31,7 @@ app.use((req, res, next) => {
   }
   next();
 });
+/* eslint-enable consistent-return */
 
 // serve up the pages
 app.use(express.static('public'));
@@ -45,6 +47,7 @@ app.use((req, res, next) => {
   next(error);
 });
 
+/* eslint-disable no-unused-vars */
 app.use((error, req, res, next) => {
   res.status(error.status || 500);
   res.json({
@@ -53,6 +56,7 @@ app.use((error, req, res, next) => {
     },
   });
 });
+/* eslint-enable no-unused-vars */
 
 // determine listening port
 const port = process.env.port || 3003;

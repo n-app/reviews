@@ -29,7 +29,6 @@ const getReviewPage = async (roomId, pageNum, numberReviewsPerPage) => {
 
 const getQueriedReviews = async (roomId, keyword, sortBy, numberReviewsPerPage) => {
   try {
-    console.log(roomId);
     const url = roomUrl + roomId;
     const params = { pageonly: 1, start: 0, limit: numberReviewsPerPage };
     const response = axios.post(url, { keyword, sortBy }, { params });

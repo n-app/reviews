@@ -8,7 +8,7 @@ jobs:
     docker:
       # specify the version you desire here
       - image: mysql:8.0
-        command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_bin --innodb-large-prefix=true --innodb-file-format=Barracuda --max_allowed_packet=32M
+        command: mysqld --max_allowed_packet=32M
         environment: 
           MYSQL_DATABASE: nappbnbreviews
           MYSQL_USER: root
@@ -36,7 +36,7 @@ jobs:
           - v1-dependencies-
 
       - run: npm install
-      # - run: mysql -h 127.0.0.1 -u root < schema.sql
+      - run: mysql -h 127.0.0.1 -u root < schema.sql
 
       - save_cache:
           paths:
