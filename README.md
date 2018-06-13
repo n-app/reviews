@@ -2,11 +2,11 @@
 
 **Nappbnb**
 
-> An airbnb clone room listing page including four main components:
-> * description-listing
-> * booking-servie
-> * reviews
-> * filter-listing
+An airbnb clone room listing page including four main components:
+* description-listing
+* booking-servie
+* reviews
+* filter-listing
 
 ## Related Projects
 
@@ -23,8 +23,8 @@
 
 ## Usage
 
-> clone the github repo to your local drive
-> Form within in the root directory:
+* clone the github repo to your local drive
+* Form within in the root directory:
 ```sh
 npm run react-dev
 npm run dev-server
