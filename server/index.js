@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const http = require('http');
+const path = require('path');
 const reviewsRoute = require('./reviews');
 
 
@@ -34,7 +35,7 @@ app.use((req, res, next) => {
 /* eslint-enable consistent-return */
 
 // serve up the pages
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, '../public')));
 app.get('/favicon.ico', (req, res) => res.status(204));
 
 // handle /reviews routes
