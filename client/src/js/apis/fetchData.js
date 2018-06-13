@@ -1,16 +1,15 @@
 // client/src/js/apis/fetchData.js
 
-import fetch from 'cross-fetch';
+import axios from 'axios';
 
-const roomUrl = 'http://localhost:3003/rooms/';
+const roomUrl = '/reviews/';
 
 const getRoomInfo = async (roomId, numberReviewsPerPage) => {
   try {
-    const url = new URL(roomUrl + roomId);
+    const url = roomUrl + roomId;
     const params = { pageonly: 0, start: 0, limit: numberReviewsPerPage };
-    url.search = new URLSearchParams(params);
-    const response = fetch(url);
-    return (await response).json();
+    const response = axios.get(url, { params });
+    return (await response).data;
   } catch (err) {
     throw (err);
   }
@@ -18,12 +17,11 @@ const getRoomInfo = async (roomId, numberReviewsPerPage) => {
 
 const getReviewPage = async (roomId, pageNum, numberReviewsPerPage) => {
   try {
-    const url = new URL(roomUrl + roomId);
+    const url = roomUrl + roomId;
     const start = (pageNum - 1) * numberReviewsPerPage;
     const params = { pageonly: 1, start, limit: numberReviewsPerPage };
-    url.search = new URLSearchParams(params);
-    const response = fetch(url);
-    return (await response).json();
+    const response = axios.get(url, { params });
+    return (await response).data;
   } catch (err) {
     throw (err);
   }
@@ -31,18 +29,11 @@ const getReviewPage = async (roomId, pageNum, numberReviewsPerPage) => {
 
 const getQueriedReviews = async (roomId, keyword, sortBy, numberReviewsPerPage) => {
   try {
-    const url = new URL(roomUrl + roomId);
+    console.log(roomId);
+    const url = roomUrl + roomId;
     const params = { pageonly: 1, start: 0, limit: numberReviewsPerPage };
-    url.search = new URLSearchParams(params);
-    const response = fetch(url, {
-      method: 'POST',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ keyword, sortBy }),
-    });
-    return (await response).json();
+    const response = axios.post(url, { keyword, sortBy }, { params });
+    return (await response).data;
   } catch (err) {
     throw (err);
   }

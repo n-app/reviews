@@ -1,7 +1,8 @@
 // jest file
 
+import axios from 'axios';
+
 import { call, put, fork, cancel } from 'redux-saga/effects';
-import { cloneableGenerator } from 'redux-saga/utils';
 import { createMockTask } from 'redux-saga/lib/utils';
 import fetchData from '../apis/fetchData';
 import { updateState } from './index';
@@ -18,13 +19,14 @@ import {
   selectARoom,
 } from './sagas';
 
-
 describe('Mock selectAPage', () => {
   const mockState = {
     currentPage: 2,
-    roomId: 1002,
+    roomId: 1001,
     numberReviewsPerPage: 7,
   };
+  const alterUrl = 'http://localhost:3003/';
+  axios.defaults.baseURL = alterUrl;
 
   describe('selectAPage test', () => {
     const selectAPageGen = selectAPage({ type: 'SELECT_A_PAGE', state: mockState });

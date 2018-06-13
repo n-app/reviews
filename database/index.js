@@ -82,6 +82,7 @@ const queryReviewsByRoomId = async (queryObj) => {
 
 const queryRoomInfoByRoomId = async (roomId) => {
   try {
+    console.log(roomId);
     const data = connection.query('SELECT * FROM rooms WHERE id = ?;', roomId);
     return Object.assign({}, (await data)[0]);
   } catch (err) {

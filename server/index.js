@@ -2,7 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const http = require('http');
-const roomsRoute = require('./rooms');
+const reviewsRoute = require('./reviews');
 
 
 const app = express();
@@ -35,8 +35,8 @@ app.use((req, res, next) => {
 app.use(express.static('public'));
 app.get('/favicon.ico', (req, res) => res.status(204));
 
-// handel /rooms routes
-app.use('/rooms', roomsRoute);
+// handel /reviews routes
+app.use('/reviews', reviewsRoute);
 
 // handle error
 app.use((req, res, next) => {
