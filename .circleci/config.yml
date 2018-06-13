@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: mysql:8.0
+      - image: circleci/mysql:8.0
         command: mysqld --max_allowed_packet=32M
         environment: 
           MYSQL_DATABASE: nappbnbreviews
