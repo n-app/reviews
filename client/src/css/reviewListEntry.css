@@ -1,6 +1,8 @@
 .review-list-entry {
   background-color: white;
   position: relative;
+  padding-left: 10px;
+  padding-right: 0px;
   -webkit-transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
   transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
@@ -9,6 +11,9 @@
   content: "";
   position: absolute;
   z-index: -1;
+  align-content: center;
+  padding-left: 10px;
+  padding-right: 0px;
   top: 0;
   left: 0;
   width: 100%;
