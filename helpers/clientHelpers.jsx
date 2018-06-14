@@ -287,7 +287,7 @@ export const truncateWords = (string, maxLength) => {
 };
 
 /* eslint-disable consistent-return */
-export const scrollIt = (destination, duration = 200, easing = 'linear') => {
+export const scrollIt = (destination, adjustment, duration = 200, easing = 'linear') => {
   const easings = {
     linear(t) {
       return t;
@@ -348,9 +348,10 @@ export const scrollIt = (destination, duration = 200, easing = 'linear') => {
   const windowHeight = window.innerHeight
   || document.documentElement.clientHeight
   || document.getElementsByTagName('body')[0].clientHeight;
-  const destinationOffset = typeof destination === 'number'
+  let destinationOffset = typeof destination === 'number'
     ? destination
     : destination.offsetTop;
+  destinationOffset += adjustment;
   const destinationOffsetToScroll = Math.round(Math.min(
     documentHeight - windowHeight,
     destinationOffset,

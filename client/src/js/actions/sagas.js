@@ -75,7 +75,7 @@ export function* getReviewPage(state) {
     };
     yield call(pageInfoFetched, newState);
     const destination = document.querySelector('.review-list');
-    scrollIt(destination, 300, 'easeInOutQuad');
+    scrollIt(destination, -50, 500, 'easeInOutQuad');
   } catch (err) {
     throw (err);
   }
