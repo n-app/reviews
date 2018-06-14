@@ -15,7 +15,7 @@ jobs:
           MYSQL_ALLOW_EMPTY_PASSWORD: true
           MYSQL_PASSWORD:
         
-      - image: circleci/node:9.3.0
+      - image: circleci/node:7.10
         environment: 
           MYSQL_HOST: 127.0.0.1
           MYSQL_DATABASE: nappbnbreviews
