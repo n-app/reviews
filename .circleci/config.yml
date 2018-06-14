@@ -14,7 +14,9 @@ jobs:
           MYSQL_USER: root
           MYSQL_ALLOW_EMPTY_PASSWORD: true
           MYSQL_PASSWORD:
-        
+      
+      - image: docker:17.05.0-ce-git
+
       - image: circleci/node:7.10
         environment: 
           MYSQL_HOST: 127.0.0.1
