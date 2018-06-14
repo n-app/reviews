@@ -52,7 +52,7 @@
   "main": "server/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/n-app/reviews.git"
+    "url": "git+https://github.com/n-app/reviews.git"
   },
   "keywords": [
     "airbnb",

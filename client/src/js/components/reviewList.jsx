@@ -23,7 +23,8 @@ const mapStateToProps = state => ({
   numberReviewsPerPage: state.numberReviewsPerPage,
   currentPage: state.currentPage,
   selectedPages: displayPages(state.currentPage, state.pages),
-  reviews: state.reviews.map((review, index) => ({ ...review, avatar: hardcodedAvatarUrl[index] })),
+  // reviews: state.reviews.map((review, index) => ({ ...review, avatar: hardcodedAvatarUrl[index] })),
+  reviews: state.reviews,
 });
 
 const mapDispatchToProps = dispatch => ({
