@@ -7,13 +7,15 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: mysql:5.6
+
+      - image: circleci/node:9.3.0
+
+      - image: mysql:5.7
         environment:
           - MYSQL_ALLOW_EMPTY_PASSWORD=yes
           - MYSQL_USER=root
           - MYSQL_PASSWORD=
 
-      - image: circleci/node:9.3.0
     working_directory: ~/repo
 
     steps:
