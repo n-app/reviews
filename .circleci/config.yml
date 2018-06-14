@@ -4,6 +4,12 @@
 #
 version: 2
 jobs:
+  deploy_job:
+    steps:
+      - add_ssh_keys:
+        fingerprints:
+          - "f5:9c:4f:dd:95:eb:ab:93:46:6d:d5:a4:89:a1:d4:ee"
+
   build:
     docker:
       # specify the version you desire here
