@@ -8,9 +8,9 @@ jobs:
     docker:
       # specify the version you desire here
 
-      - image: circleci/node:9.3.0
+      - image: circleci/node:10-browsers
 
-      - image: mysql:5.7
+      - image: circleci/mysql:8.0
         environment:
           - MYSQL_ALLOW_EMPTY_PASSWORD=yes
           - MYSQL_USER=root
@@ -29,12 +29,16 @@ jobs:
           - v1-dependencies-
 
       - run: npm install
+      - run: mysql -u root < database/schema.sql
+      - run: node database/insertMockData.js
+      
 
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
       
+      - run: node server/index.js
       
       # run tests!
       - run: npm test
