@@ -65,6 +65,7 @@ const insertMockData = async () => {
       db.insertRecord('reviews', reviewObjs)
     ]);
     console.log('done');
+    return Promise.resolve();
   } catch (err) {
     throw new Error(err.message);
   }
@@ -75,5 +76,5 @@ module.exports = {
 };
 
 if (!module.parent) {
-  insertMockData();
+  insertMockData().then(() => { process.exit(-1); });
 }

@@ -62,5 +62,11 @@ app.use((error, req, res, next) => {
 // determine listening port
 const port = process.env.port || 3003;
 const server = http.createServer(app);
-server.listen(port);
-console.log(`reviews listening on ${port}`);
+
+module.exports = server;
+
+if (!module.parent) {
+  server.listen(port);
+  console.log(`reviews listening on ${port}`);
+}
+

@@ -7,21 +7,14 @@ jobs:
   build:
     docker:
       # specify the version you desire here
+
+      - image: circleci/node:10-browsers
+
       - image: circleci/mysql:8.0
-        command: mysqld --max_allowed_packet=32M
-        environment: 
-          MYSQL_DATABASE: nappbnbreviews
-          MYSQL_USER: root
-          MYSQL_ALLOW_EMPTY_PASSWORD: true
-          MYSQL_PASSWORD:
-        
-      - image: circleci/node:9.3.0
-        environment: 
-          MYSQL_HOST: 127.0.0.1
-          MYSQL_DATABASE: nappbnbreviews
-          MYSQL_USER: root
-          MYSQL_ALLOW_EMPTY_PASSWORD: true
-          MYSQL_PASSWORD:
+        environment:
+          - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+          - MYSQL_USER=root
+          - MYSQL_PASSWORD=
 
     working_directory: ~/repo
 
@@ -36,13 +29,16 @@ jobs:
           - v1-dependencies-
 
       - run: npm install
-      - run: mysql -h 127.0.0.1 -u root < schema.sql
+      - run: mysql -u root < database/schema.sql
+      - run: node database/insertMockData.js
+      
 
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
       
+      - run: node server/index.js
       
       # run tests!
       - run: npm test

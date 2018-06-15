@@ -95,3 +95,8 @@ module.exports = {
   queryReviewsByRoomId,
   queryRoomInfoByRoomId,
 };
+
+if (!module.parent) {
+  connection.end();
+  process.exit(-1);
+}
