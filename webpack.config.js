@@ -6,7 +6,7 @@ const srcFolder = path.join(__dirname, '/client/src/');
 
 module.exports = {
   entry: {
-    reviews: ['babel-polyfill', path.join(srcFolder, '/js/index.jsx')],
+    reviews: [path.join(srcFolder, '/js/index.jsx')],
   },
   resolve: { extensions: ['.js', '.jsx'] },
   output: {
