@@ -2,6 +2,8 @@
 
 import axios from 'axios';
 
+if (!global._babelPolyfill) require('babel-polyfill');
+
 const roomUrl = '/reviews/';
 
 const getRoomInfo = async (roomId, numberReviewsPerPage) => {

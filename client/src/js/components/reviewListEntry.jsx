@@ -37,8 +37,6 @@ class ReviewListEntry extends React.Component {
             <a href={this.props.review.avatar}>
               <img
                 src={this.props.review.avatar}
-                height="48"
-                width="48"
                 alt={`${this.props.review.userName} User Profile`}
                 title={`${this.props.review.userName} User Profile`}
               />
