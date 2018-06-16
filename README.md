@@ -54,4 +54,5 @@ From within the root directory:
 
 ```sh
 mysql -u [username] -p [password] < database/schema.sql
+node database/insertMockData.js
 ```
