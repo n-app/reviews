@@ -62,7 +62,7 @@
 }
 
 .reviews .chevron-icon path {
-  color: #484848;
+  fill: inherit;
 }
 
 .reviews .star-ratings svg {
