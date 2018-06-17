@@ -22,12 +22,12 @@
   box-sizing: border-box;
 }
 
-.grey-out {
+.reviews .grey-out {
   opacity: 0.15;
   filter: alpha(opacity = 15);
 }
 
-.loader {
+.reviews .loader {
   position: relative;
   display: block;
   margin-left: auto;
