@@ -55,24 +55,27 @@
   display: inline-block;
 }
 
-.reviews .chevron-icon svg{
+.reviews .chevron-icon svg {
+  display: block;
+  width: 1em;
+  height: 1em;
+}
+
+.reviews .chevron-icon path {
   color: inherit;
+}
+
+.reviews .star-ratings svg {
   display: block;
   width: 1em;
   height: 1em;
 }
 
-.reviews .star-ratings svg{
-  display: block;
-  width: 1em;
-  height: 1em;
-}
-
-.reviews .full-star path, .half-star path{
+.reviews .full-star path, .half-star path {
   fill: #008489;
 }
 
-.reviews .hidden-half-star path, .zero-star path{
+.reviews .hidden-half-star path, .zero-star path {
   fill: #D8D8D8;
 }
 
