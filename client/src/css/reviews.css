@@ -12,7 +12,7 @@
   line-height: 1.43;
   letter-spacing: normal;
   font-weight: normal;
-  max-width: 600px;
+  width: 600px;
   margin-bottom: 40px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -38,7 +38,7 @@
   border-width: 4px;
   border-style: solid;
   border-color: #f3f3f3;
-  border-top-color: darkgrey;
+  border-top-color: #dbcf8b;
   border-right-color: chartreuse;
   border-radius: 50%;
   animation: spin 1s linear infinite;
@@ -51,39 +51,46 @@
   100% { transform: rotate(360deg); }
 }
 
-.star-ratings span{
+.reviews .star-ratings span{
   display: inline-block;
 }
 
-.chevron-icon svg{
+.reviews .chevron-icon svg{
+  color: inherit;
   display: block;
   width: 1em;
   height: 1em;
 }
 
-.star-ratings svg{
+.reviews .star-ratings svg{
   display: block;
   width: 1em;
   height: 1em;
 }
 
-.full-star path, .half-star path{
+.reviews .full-star path, .half-star path{
   fill: #008489;
 }
 
-.hidden-half-star path, .zero-star path{
+.reviews .hidden-half-star path, .zero-star path{
   fill: #D8D8D8;
 }
 
-.point-five-star {
+.reviews .point-five-star {
   position: relative;
   text-align: left;
 }
 
-.half-star {
+.reviews .half-star {
   position: absolute;
 }
 
-.hidden-half-star {
+.reviews .hidden-half-star {
   position: absolute;
+}
+
+@media only screen and (max-width: 744px) {
+  .reviews {
+    width: 100%;
+  }
 }
