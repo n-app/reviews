@@ -4,8 +4,8 @@ import axios from 'axios';
 
 import { call, put, fork, cancel } from 'redux-saga/effects';
 import { createMockTask } from 'redux-saga/lib/utils';
-import fetchData from '../apis/fetchData';
-import { updateState } from './index';
+import fetchData from '../client/src/js/apis/fetchData';
+import { updateState } from '../client/src/js/actions/index';
 import {
   pageIsFetching,
   roomIsFetching,

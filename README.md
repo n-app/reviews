@@ -3,6 +3,7 @@
 **Nappbnb**
 
 An airbnb clone room listing page including four main components:
+* title gallery
 * description-listing
 * booking-servie
 * reviews
@@ -10,6 +11,7 @@ An airbnb clone room listing page including four main components:
 
 ## Related Projects
 
+  - https://github.com/n-app/titleGallery
   - https://github.com/n-app/N-appbnb-description-listing
   - https://github.com/n-app/booking-service
   - https://github.com/n-app/reviews
