@@ -38,8 +38,8 @@
   border-width: 4px;
   border-style: solid;
   border-color: #f3f3f3;
-  border-top-color: #dbcf8b;
-  border-right-color: chartreuse;
+  border-top-color: #c8ff00;
+  border-right-color: #33ff00;
   border-radius: 50%;
   animation: spin 1s linear infinite;
   opacity: 1;
@@ -62,7 +62,7 @@
 }
 
 .reviews .chevron-icon path {
-  fill: inherit;
+  fill: #484848;
 }
 
 .reviews .star-ratings svg {
