@@ -4,8 +4,6 @@ CREATE DATABASE nappbnbreviews;
 
 USE nappbnbreviews;
 
-SET GLOBAL max_allowed_packet=16777216;
-
 DROP TABLE IF EXISTS reviews;
 		
 CREATE TABLE reviews (

@@ -1,9 +1,8 @@
 module.exports = {
-  user: 'root',
-  host: '127.0.0.1',
-  // password: 'YOUR_PASSWORD_HERE',
-  // if you do not have a password, delete this key/value pair from
-  // the object
-  database: 'nappbnbreviews',
+  host: process.env.MYSQL_HOSTNAME,
+  user: process.env.MYSQL_USERNAME,
+  port: process.env.MYSQL_PORT,
+  password: process.env.MYSQL_PASSWORD,
+  database: process.env.MYSQL_DATABASE,
   multipleStatements: true,
 };
