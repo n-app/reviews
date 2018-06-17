@@ -1,6 +1,10 @@
 const randomGenerator = require('./randomGenerator');
 const db = require('./index');
 
+// increase max_allowed_packet parameter in mysql database to allow large write pipe
+// Either add the following command to schema.sql or set the parameter on aws rds parameter group
+// SET GLOBAL max_allowed_packet=16777216;
+
 const numPics = 348;
 const templateUrl = 'https://s3-us-west-1.amazonaws.com/nappbnbreviews/portait**.jpeg';
 

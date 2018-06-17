@@ -31,6 +31,11 @@ function handleDisconnect() {
 
 handleDisconnect();
 
+// none error handling version of create connection, but should not matter if mysql security setup is correct
+// const connection = mysql.createConnection(mysqlConfig);
+// connection.connect();
+// connection.query = util.promisify(connection.query);
+
 // helper database functions using async/await
 const insertRecord = async (tableName, recordObjs) => {
   const queryOptions = {
