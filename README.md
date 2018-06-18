@@ -32,6 +32,15 @@ npm run react-dev
 npm run dev-server
 ```
 
+## Technical Highlights
+
+* webpack
+* react
+* redux and redux-saga
+* docker + EBS
+* axios
+* Jest
+
 ## Requirements
 
 An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
