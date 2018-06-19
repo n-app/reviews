@@ -11,11 +11,13 @@ An airbnb clone room listing page including four main components:
 
 ## Related Projects
 
-  - https://github.com/n-app/titleGallery
-  - https://github.com/n-app/N-appbnb-description-listing
-  - https://github.com/n-app/booking-service
-  - https://github.com/n-app/reviews
-  - https://github.com/n-app/filter-listings-ryan
+  - Proxy: https://github.com/n-app/Proxy_DavidChen
+
+  - Title Gallery: https://github.com/n-app/titleGallery
+  - Description Listing: https://github.com/n-app/N-appbnb-description-listing
+  - Booking: https://github.com/n-app/booking-service
+  - Reviews: https://github.com/n-app/reviews
+  - Filter Listing: https://github.com/n-app/filter-listings-ryan
 
 ## Table of Contents
 
